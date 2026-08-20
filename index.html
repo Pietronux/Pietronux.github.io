@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pietronux — Games</title>
+<meta name="description" content="Small, handmade mobile games. Independent developer based in Italy.">
+<style>
+  :root {
+    --bg: #fdfaf4;
+    --panel: #ffffff;
+    --ink: #2b2723;
+    --muted: #6b6259;
+    --rule: #e6ded1;
+    --accent: #c8762a;
+    --accent-ink: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1a18;
+      --panel: #252220;
+      --ink: #ece5db;
+      --muted: #a89e93;
+      --rule: #3a3531;
+      --accent: #e0954d;
+      --accent-ink: #241a10;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 3rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 42rem; margin: 0 auto; }
+
+  header { margin-bottom: 3rem; }
+  h1 { font-size: 2.1rem; line-height: 1.15; margin: 0 0 .5rem; letter-spacing: -.01em; }
+  .tagline { color: var(--muted); font-size: 1.05rem; margin: 0; }
+
+  h2 {
+    font-size: .82rem; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--muted); margin: 0 0 1rem; font-weight: 600;
+  }
+  section { margin-bottom: 3rem; }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.25rem 1.35rem;
+  }
+  .card h3 { margin: 0 0 .35rem; font-size: 1.15rem; }
+  .card p { margin: 0 0 .75rem; color: var(--muted); }
+  .meta { font-size: .85rem; color: var(--muted); }
+  .meta a { color: var(--accent); }
+
+  form { display: grid; gap: .85rem; }
+  label { display: grid; gap: .3rem; font-size: .9rem; font-weight: 600; }
+  input, textarea {
+    font: inherit;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: .65rem .75rem;
+    width: 100%;
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+  textarea { min-height: 8rem; resize: vertical; }
+  button {
+    font: inherit; font-weight: 600;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 0; border-radius: 8px;
+    padding: .75rem 1.4rem;
+    cursor: pointer;
+    justify-self: start;
+  }
+  button:hover { filter: brightness(1.06); }
+  .hint { font-size: .85rem; color: var(--muted); margin: .1rem 0 0; }
+
+  footer {
+    margin-top: 3.5rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: .88rem;
+    display: flex; flex-wrap: wrap; gap: .5rem 1.25rem;
+  }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Pietronux</h1>
+  <p class="tagline">Small, handmade mobile games. Independent developer, Italy.</p>
+</header>
+
+<section>
+  <h2>Games</h2>
+  <div class="card">
+    <h3>Longbara</h3>
+    <p>A calm sliding-path puzzle with a capybara. Fill every tile in one unbroken run —
+       endless hand-tuned levels, no timers, no pressure.</p>
+    <p class="meta">Coming to Android and iOS ·
+       <a href="/longbara/privacy.html">Privacy policy</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <form id="contact">
+    <label>
+      Your name
+      <input type="text" name="name" autocomplete="name" required>
+    </label>
+    <label>
+      Subject
+      <input type="text" name="subject" value="Hello" required>
+    </label>
+    <label>
+      Message
+      <textarea name="message" required></textarea>
+    </label>
+    <button type="submit">Send message</button>
+    <p class="hint">Opens your email app with the message ready to send.
+       Nothing is stored or transmitted by this page.</p>
+  </form>
+</section>
+
+<footer>
+  <span>© <span id="year">2026</span> Pietronux</span>
+  <a href="/longbara/privacy.html">Privacy policy</a>
+</footer>
+
+</main>
+
+<script>
+(function () {
+  // L'indirizzo non sta scritto nel sorgente: i raccoglitori automatici leggono l'HTML
+  // cosi' com'e', e un mailto in chiaro su una pagina indicizzata si paga in spam.
+  var user = ['pietrosardaro8', 'gmail.com'];
+
+  // Per passare a un modulo vero (Formspree, Web3Forms e simili) basta mettere qui
+  // l'endpoint: da quel momento il messaggio parte in POST invece di aprire la posta,
+  // e l'indirizzo non serve piu' a nessuno.
+  var ENDPOINT = '';
+
+  var form = document.getElementById('contact');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var data = new FormData(form);
+    var name = (data.get('name') || '').trim();
+    var subject = (data.get('subject') || 'Hello').trim();
+    var message = (data.get('message') || '').trim();
+
+    if (ENDPOINT) {
+      fetch(ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(function () { form.reset(); alert('Thanks — your message is on its way.'); })
+        .catch(function () { alert('Something went wrong. Please try again later.'); });
+      return;
+    }
+
+    var body = message + '\n\n— ' + name;
+    window.location.href = 'mailto:' + user.join('@') +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
