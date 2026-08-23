@@ -1,159 +1,233 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-world="bosco">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pietronux — Games</title>
-<meta name="description" content="Small, handmade mobile games. Independent developer based in Italy.">
+<title>Pietro Sardaro Apps — small, handmade mobile games</title>
+<meta name="description" content="Independent game developer in Italy. Maker of Longbara, a calm sliding-path puzzle.">
+<link rel="icon" href="assets/capybara.png">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-  :root {
-    --bg: #fdfaf4;
-    --panel: #ffffff;
-    --ink: #2b2723;
-    --muted: #6b6259;
-    --rule: #e6ded1;
-    --accent: #c8762a;
-    --accent-ink: #ffffff;
+  .masthead {
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+    padding: clamp(1.75rem, 4vw, 3rem) 0 0;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1a18;
-      --panel: #252220;
-      --ink: #ece5db;
-      --muted: #a89e93;
-      --rule: #3a3531;
-      --accent: #e0954d;
-      --accent-ink: #241a10;
-    }
+  .wordmark {
+    font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'opsz' 14;
+    font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 3rem 1.25rem 4rem;
-    background: var(--bg);
-    color: var(--ink);
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-  main { max-width: 42rem; margin: 0 auto; }
+  .masthead .muted { font-size: .88rem; }
 
-  header { margin-bottom: 3rem; }
-  h1 { font-size: 2.1rem; line-height: 1.15; margin: 0 0 .5rem; letter-spacing: -.01em; }
-  .tagline { color: var(--muted); font-size: 1.05rem; margin: 0; }
-
-  h2 {
-    font-size: .82rem; text-transform: uppercase; letter-spacing: .09em;
-    color: var(--muted); margin: 0 0 1rem; font-weight: 600;
+  /* --- apertura --- */
+  .hero { position: relative; padding: clamp(3.5rem, 11vw, 8rem) 0 clamp(2rem, 5vw, 3.5rem); }
+  .hero h1 { max-width: 15ch; }
+  .hero h1 em {
+    font-style: normal; font-variation-settings: 'opsz' 144, 'SOFT' 90, 'WONK' 1;
+    color: var(--block);
   }
-  section { margin-bottom: 3rem; }
+  .lede { font-size: clamp(1.06rem, 1rem + .45vw, 1.3rem); max-width: 30rem; margin-top: 1.8rem; }
 
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    padding: 1.25rem 1.35rem;
+  .capy {
+    position: absolute; right: -4%; top: clamp(1rem, 4vw, 3rem);
+    width: clamp(120px, 26vw, 300px); z-index: -1;
+    opacity: .96; rotate: 6deg;
+    filter: drop-shadow(0 18px 34px color-mix(in oklab, var(--ink) 22%, transparent));
+    animation: bob 7s ease-in-out infinite;
   }
-  .card h3 { margin: 0 0 .35rem; font-size: 1.15rem; }
-  .card p { margin: 0 0 .75rem; color: var(--muted); }
-  .meta { font-size: .85rem; color: var(--muted); }
-  .meta a { color: var(--accent); }
+  @keyframes bob { 50% { transform: translateY(-11px) rotate(-2deg); } }
 
-  form { display: grid; gap: .85rem; }
-  label { display: grid; gap: .3rem; font-size: .9rem; font-weight: 600; }
+  /* --- selettore delle ambientazioni --- */
+  .worlds { margin: clamp(2.5rem, 6vw, 4rem) 0 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; padding: 0; list-style: none; }
+  .chip {
+    font: 600 .82rem/1 inherit; font-family: inherit;
+    padding: .5rem .85rem; border-radius: 999px; cursor: pointer;
+    background: transparent; color: var(--ink);
+    border: 1px solid color-mix(in oklab, var(--ink) 22%, transparent);
+    transition: background-color .25s, color .25s, border-color .25s, transform .25s cubic-bezier(.16,1,.3,1);
+  }
+  .chip:hover { transform: translateY(-2px); border-color: var(--block); }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
+
+  /* --- il gioco --- */
+  .game {
+    margin-top: clamp(4.5rem, 11vw, 8rem);
+    display: grid; gap: clamp(2rem, 5vw, 4rem);
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  @media (max-width: 46rem) { .game { grid-template-columns: 1fr; } }
+
+  .game h2 { margin-bottom: .9rem; }
+  .facts { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: .55rem; }
+  .facts li { display: flex; gap: .7rem; align-items: baseline; }
+  .facts li::before {
+    content: ""; width: .5rem; height: .5rem; border-radius: .16rem;
+    background: var(--accent); flex: none; translate: 0 -.1rem;
+  }
+
+  /* Una board in miniatura: le celle chiare sono da riempire,
+     quelle scure il percorso gia' fatto. E' il gioco, non un ornamento. */
+  .board {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: .4rem;
+    padding: .8rem; border-radius: 1.15rem;
+    background: color-mix(in oklab, var(--board) 78%, var(--sky));
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--sky) 70%, #fff) inset;
+    max-width: 22rem;
+  }
+  .tile { aspect-ratio: 1; border-radius: .42rem; background: color-mix(in oklab, var(--ground) 70%, var(--board)); }
+  .tile--filled { background: var(--body); }
+  .tile--block { background: var(--block); }
+  .tile--head { background: var(--body); position: relative; }
+  .tile--head::after {
+    content: ""; position: absolute; inset: 18%;
+    border-radius: 50%; background: color-mix(in oklab, var(--body) 70%, #000);
+    opacity: .28;
+  }
+
+  /* --- contatto --- */
+  .contact { margin-top: clamp(4.5rem, 11vw, 8rem); }
+  form { display: grid; gap: 1rem; max-width: 32rem; margin-top: 1.6rem; }
+  label { display: grid; gap: .35rem; font-size: .84rem; font-weight: 600;
+          letter-spacing: .04em; text-transform: uppercase;
+          color: color-mix(in oklab, var(--ink) 62%, var(--sky)); }
   input, textarea {
-    font: inherit;
-    color: var(--ink);
-    background: var(--panel);
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: .65rem .75rem;
-    width: 100%;
+    font: inherit; color: var(--ink); background: color-mix(in oklab, var(--sky) 55%, #fff);
+    border: 1px solid color-mix(in oklab, var(--ink) 18%, transparent);
+    border-radius: .7rem; padding: .7rem .85rem; width: 100%;
   }
-  input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
-  textarea { min-height: 8rem; resize: vertical; }
-  button {
-    font: inherit; font-weight: 600;
-    background: var(--accent);
-    color: var(--accent-ink);
-    border: 0; border-radius: 8px;
-    padding: .75rem 1.4rem;
-    cursor: pointer;
-    justify-self: start;
+  input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-color: transparent; }
+  textarea { min-height: 7.5rem; resize: vertical; }
+  button[type="submit"] {
+    justify-self: start; font: 600 1rem/1 inherit; font-family: inherit;
+    padding: .8rem 1.5rem; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--ink); color: var(--sky);
+    transition: transform .25s cubic-bezier(.16,1,.3,1), background-color .25s;
   }
-  button:hover { filter: brightness(1.06); }
-  .hint { font-size: .85rem; color: var(--muted); margin: .1rem 0 0; }
+  button[type="submit"]:hover { transform: translateY(-2px); background: var(--block); }
+  .note { font-size: .86rem; margin: 0; }
 
-  footer {
-    margin-top: 3.5rem; padding-top: 1.25rem;
-    border-top: 1px solid var(--rule);
-    color: var(--muted); font-size: .88rem;
-    display: flex; flex-wrap: wrap; gap: .5rem 1.25rem;
-  }
-  footer a { color: var(--accent); }
+  footer { margin-top: clamp(4rem, 9vw, 7rem); padding-top: 1.6rem; font-size: .88rem;
+           display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; align-items: baseline; }
 </style>
 </head>
 <body>
+
 <main>
-
-<header>
-  <h1>Pietronux</h1>
-  <p class="tagline">Small, handmade mobile games. Independent developer, Italy.</p>
-</header>
-
-<section>
-  <h2>Games</h2>
-  <div class="card">
-    <h3>Longbara</h3>
-    <p>A calm sliding-path puzzle with a capybara. Fill every tile in one unbroken run —
-       endless hand-tuned levels, no timers, no pressure.</p>
-    <p class="meta">Coming to Android and iOS ·
-       <a href="/longbara/privacy.html">Privacy policy</a></p>
+  <div class="masthead">
+    <span class="wordmark">Pietro Sardaro Apps</span>
+    <span class="muted">Independent games · Italy</span>
   </div>
-</section>
 
-<section>
-  <h2>Contact</h2>
-  <form id="contact">
-    <label>
-      Your name
-      <input type="text" name="name" autocomplete="name" required>
-    </label>
-    <label>
-      Subject
-      <input type="text" name="subject" value="Hello" required>
-    </label>
-    <label>
-      Message
-      <textarea name="message" required></textarea>
-    </label>
-    <button type="submit">Send message</button>
-    <p class="hint">Opens your email app with the message ready to send.
-       Nothing is stored or transmitted by this page.</p>
-  </form>
-</section>
+  <header class="hero">
+    <img class="capy" src="assets/capybara.png" alt="" aria-hidden="true" width="489" height="489">
+    <h1 class="rise">Small games, made <em>slowly</em>.</h1>
+    <p class="lede rise muted">One person, one puzzle at a time. No timers, no energy bars,
+       nothing that nags you to come back.</p>
+  </header>
 
-<footer>
-  <span>© <span id="year">2026</span> Pietronux</span>
-  <a href="/longbara/privacy.html">Privacy policy</a>
-</footer>
+  <hr class="rule">
 
+  <section class="worlds rise">
+    <p class="eyebrow">Ten worlds</p>
+    <p>Longbara changes its colours as you get deeper. These are the real palettes,
+       straight out of the game — try one.</p>
+    <ul class="chips" id="chips">
+      <li><button class="chip" type="button" data-set="bosco" aria-pressed="true">Bosco</button></li>
+      <li><button class="chip" type="button" data-set="tramonto" aria-pressed="false">Tramonto</button></li>
+      <li><button class="chip" type="button" data-set="lavanda" aria-pressed="false">Lavanda</button></li>
+      <li><button class="chip" type="button" data-set="menta" aria-pressed="false">Menta</button></li>
+      <li><button class="chip" type="button" data-set="sabbia" aria-pressed="false">Sabbia</button></li>
+      <li><button class="chip" type="button" data-set="mirtillo" aria-pressed="false">Mirtillo</button></li>
+      <li><button class="chip" type="button" data-set="cielo" aria-pressed="false">Cielo</button></li>
+      <li><button class="chip" type="button" data-set="cacao" aria-pressed="false">Cacao</button></li>
+      <li><button class="chip" type="button" data-set="rosa" aria-pressed="false">Rosa</button></li>
+      <li><button class="chip" type="button" data-set="muschio" aria-pressed="false">Muschio</button></li>
+    </ul>
+  </section>
+
+  <section class="game">
+    <div>
+      <p class="eyebrow">The game</p>
+      <h2>Longbara</h2>
+      <p>Guide a sleepy capybara across the board and fill every single tile in one
+         unbroken path. Swipe, and it slides until something stops it. Miss a tile and
+         you are boxed in — so think before you move.</p>
+      <ul class="facts">
+        <li>Every level is checked before you see it. It is always solvable.</li>
+        <li>Free hints daily. Never a wall you have to pay to pass.</li>
+        <li>No account, no sign-up, no connection needed to play.</li>
+      </ul>
+      <p style="margin-top:1.6rem"><a href="/longbara/privacy.html">Privacy policy</a>
+         <span class="muted"> · Coming to Android and iOS</span></p>
+    </div>
+
+    <div class="board" aria-hidden="true">
+      <div class="tile"></div><div class="tile"></div><div class="tile tile--block"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile tile--filled"></div>
+      <div class="tile tile--filled"></div><div class="tile tile--filled"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile tile--block"></div>
+      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile tile--head"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile tile--filled"></div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <p class="eyebrow">Say hello</p>
+    <h2>Found a bug? Got an idea?</h2>
+    <form id="contact-form">
+      <label>Your name
+        <input type="text" name="name" autocomplete="name" required>
+      </label>
+      <label>Subject
+        <input type="text" name="subject" value="Hello" required>
+      </label>
+      <label>Message
+        <textarea name="message" required></textarea>
+      </label>
+      <button type="submit">Send message</button>
+      <p class="note muted">Opens your email app with the message ready to send.
+         This page stores nothing and sends nothing on its own.</p>
+    </form>
+  </section>
+
+  <hr class="rule" style="margin-top:clamp(3rem,8vw,6rem)">
+  <footer class="muted">
+    <span>© <span id="year">2026</span> Pietro Sardaro Apps</span>
+    <a href="/longbara/privacy.html">Privacy</a>
+    <span>Made in Puglia</span>
+  </footer>
 </main>
 
 <script>
 (function () {
-  // L'indirizzo non sta scritto nel sorgente: i raccoglitori automatici leggono l'HTML
-  // cosi' com'e', e un mailto in chiaro su una pagina indicizzata si paga in spam.
-  var user = ['pietrosardaro8', 'gmail.com'];
+  // --- ambientazioni ---
+  var chips = document.getElementById('chips');
+  chips.addEventListener('click', function (event) {
+    var button = event.target.closest('.chip');
+    if (!button) return;
+    document.documentElement.dataset.world = button.dataset.set;
+    chips.querySelectorAll('.chip').forEach(function (other) {
+      other.setAttribute('aria-pressed', String(other === button));
+    });
+  });
+
+  // --- contatto ---
+  // L'indirizzo non sta scritto nel sorgente: i raccoglitori automatici leggono
+  // l'HTML com'e', e un mailto in chiaro su una pagina indicizzata si paga in spam.
+  var user = ['pietro.sardaro', 'outlook.com'];
 
   // Per passare a un modulo vero (Formspree, Web3Forms e simili) basta mettere qui
-  // l'endpoint: da quel momento il messaggio parte in POST invece di aprire la posta,
-  // e l'indirizzo non serve piu' a nessuno.
+  // l'endpoint: da quel momento il messaggio parte in POST invece di aprire la posta.
+  // Attenzione: da allora un terzo tratterebbe i dati di chi scrive, e l'informativa
+  // andrebbe integrata.
   var ENDPOINT = '';
 
-  var form = document.getElementById('contact');
-
+  var form = document.getElementById('contact-form');
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-
     var data = new FormData(form);
     var name = (data.get('name') || '').trim();
     var subject = (data.get('subject') || 'Hello').trim();
@@ -166,10 +240,9 @@
       return;
     }
 
-    var body = message + '\n\n— ' + name;
     window.location.href = 'mailto:' + user.join('@') +
       '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(body);
+      '&body=' + encodeURIComponent(message + '\n\n— ' + name);
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
