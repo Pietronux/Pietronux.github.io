@@ -94,17 +94,15 @@
   }
   .release > div { display: flex; flex-direction: column; gap: 1rem; }
   .release h2 { font-size: clamp(1.7rem, 1.2rem + 1.8vw, 2.5rem); }
-  .files { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .files { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .file {
-    display: flex; flex-direction: column; gap: .6rem; padding: 1.3rem; border-radius: 1rem; text-decoration: none;
+    display: flex; align-items: center; gap: .8rem; padding: 1.1rem 1.3rem; border-radius: 1rem; text-decoration: none;
     background: var(--sky); border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
     transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
   }
   .file:hover { transform: translateY(-3px); box-shadow: 0 14px 30px color-mix(in oklab, var(--ink) 16%, transparent); }
-  .file svg { width: 1.4rem; height: 1.4rem; }
+  .file svg { width: 1.3rem; height: 1.3rem; flex: none; }
   .file strong { font-size: 1.1rem; letter-spacing: -.01em; }
-  .file p { margin: 0; font-size: .9rem; line-height: 1.45; }
-  .file .mono { font-size: .72rem; margin-top: auto; }
   @media (max-width: 60rem) { .release { grid-template-columns: 1fr; } }
   @media (max-width: 40rem) { .files { grid-template-columns: 1fr; } }
 
@@ -182,40 +180,27 @@
       <p class="eyebrow" lang="it">Supporto</p>
       <h2 lang="en">Stuck, or found a bug?</h2>
       <h2 lang="it">Bloccato, o hai trovato un errore?</h2>
-      <p lang="en">Write to <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a> with the level number and your phone model. Answers come from the person who made the game, usually within a couple of days.</p>
-      <p lang="it">Scrivi a <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a> con il numero del livello e il modello del telefono. Risponde la persona che ha fatto il gioco, di solito entro un paio di giorni.</p>
+      <p lang="en">Write to <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a> with the level number and your phone model. You will get a real answer, usually within a couple of days.</p>
+      <p lang="it">Scrivi a <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a> con il numero del livello e il modello del telefono. Avrai una risposta vera, di solito entro un paio di giorni.</p>
     </div>
     <div id="legal">
-      <p class="eyebrow" lang="en">Legal &amp; release files</p>
-      <p class="eyebrow" lang="it">Documenti legali e di rilascio</p>
+      <p class="eyebrow" lang="en">Legal</p>
+      <p class="eyebrow" lang="it">Documenti</p>
       <div class="files">
         <a class="file" href="/longbara/privacy">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg>
           <strong lang="en">Privacy policy</strong><strong lang="it">Informativa sulla privacy</strong>
-          <p lang="en">What the game stores, what it never collects, how to change your ad choices.</p>
-          <p lang="it">Cosa salva il gioco, cosa non raccoglie mai, come cambiare le scelte sugli annunci.</p>
-          <span class="mono muted">/longbara/privacy</span>
         </a>
         <a class="file" href="/longbara/terms">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3zM14 3v5h5M9 13h6M9 17h6"/></svg>
           <strong lang="en">Terms of service</strong><strong lang="it">Termini di servizio</strong>
-          <p lang="en">The licence to play, hints and mandarins, and what the developer is not liable for.</p>
-          <p lang="it">La licenza per giocare, suggerimenti e mandarini, e di cosa lo sviluppatore non risponde.</p>
-          <span class="mono muted">/longbara/terms</span>
-        </a>
-        <a class="file" href="/app-ads.txt">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4zM8 10h8M8 14h5"/></svg>
-          <strong lang="en">Advertising</strong><strong lang="it">Pubblicità</strong>
-          <p lang="en">Ads by Google AdMob: a banner and an optional video for hints. The authorised seller is declared in this site's app-ads.txt.</p>
-          <p lang="it">Annunci di Google AdMob: un banner e un video facoltativo per i suggerimenti. Il venditore autorizzato è dichiarato nell'app-ads.txt di questo sito.</p>
-          <span class="mono muted">/app-ads.txt</span>
         </a>
       </div>
     </div>
   </section>
 
   <footer class="app-foot muted">
-    <span><span lang="en">Longbara is made by</span><span lang="it">Longbara è fatto da</span> <a href="/">Mugenbyte</a> · <span lang="en">trading name of Pietro Sardaro</span><span lang="it">nome commerciale di Pietro Sardaro</span></span>
+    <span><span lang="en">Longbara is made by</span><span lang="it">Longbara è fatto da</span> <a href="/">Mugenbyte</a></span>
     <span>© <span id="year">2026</span> Mugenbyte</span>
   </footer>
 </main>
