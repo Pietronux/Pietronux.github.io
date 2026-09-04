@@ -3,126 +3,85 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Longbara — Privacy Policy</title>
-<meta name="description" content="What Longbara stores, what it never collects, and how to change your mind about ads.">
-<link rel="icon" href="../assets/capybara.png">
-<link rel="stylesheet" href="../assets/site.css">
-<style>
-  main { max-width: 62rem; }
-
-  .masthead {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
-    flex-wrap: wrap; padding: clamp(1.75rem, 4vw, 3rem) 0 0; font-size: .88rem;
-  }
-  .wordmark {
-    font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'opsz' 14;
-    font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; text-decoration: none;
-  }
-
-  .head { padding: clamp(3rem, 9vw, 6rem) 0 clamp(2rem, 5vw, 3rem); }
-  .head h1 { font-size: clamp(2.6rem, 1.6rem + 4.4vw, 5.2rem); max-width: 14ch; }
-  .stamp { font-size: .84rem; letter-spacing: .04em; margin-top: 1.4rem; }
-
-  /* Il riassunto non e' una scheda con un bordo colorato a sinistra: e' un blocco
-     di testo piu' grande, come l'occhiello di un articolo. */
-  .summary {
-    font-size: clamp(1.1rem, 1rem + .6vw, 1.45rem);
-    line-height: 1.55; max-width: 38rem;
-    font-family: 'Fraunces', Georgia, serif;
-    font-variation-settings: 'opsz' 30, 'SOFT' 30;
-    font-weight: 400;
-    margin: 0 0 clamp(3rem, 8vw, 5rem);
-  }
-  .summary strong { font-weight: 700; }
-  .summary::after {
-    content: ""; display: block; width: 3.5rem; height: 3px; border-radius: 2px;
-    background: var(--accent); margin-top: 1.8rem;
-  }
-
-  /* Impaginazione da rivista: il titolo di sezione sta nel margine,
-     il testo tiene una misura leggibile invece di allargarsi a tutto schermo. */
-  section {
-    display: grid; gap: .4rem clamp(2rem, 5vw, 4rem);
-    grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
-    padding: clamp(1.8rem, 4vw, 2.6rem) 0;
-    border-top: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
-  }
-  @media (max-width: 48rem) { section { grid-template-columns: 1fr; gap: .9rem; } }
-
-  section h2 {
-    font-size: clamp(1.05rem, .95rem + .4vw, 1.3rem);
-    font-variation-settings: 'opsz' 18, 'SOFT' 30;
-    position: sticky; top: 1.5rem; align-self: start;
-  }
-  @media (max-width: 48rem) { section h2 { position: static; } }
-
-  section > div > :last-child { margin-bottom: 0; }
-
-  ul { padding-left: 1.1rem; margin: 0 0 1.1em; max-width: var(--measure); }
-  li { margin: .3rem 0; }
-  li::marker { color: var(--accent); }
-
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .86em;
-    background: color-mix(in oklab, var(--ink) 8%, transparent);
-    padding: .12em .4em; border-radius: .35rem;
-  }
-
-  footer { margin-top: clamp(3rem, 8vw, 5rem); padding-top: 1.6rem;
-           border-top: 1px solid color-mix(in oklab, var(--ink) 14%, transparent);
-           font-size: .88rem; display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; }
-</style>
+<title data-en="Longbara — Privacy Policy" data-it="Longbara — Informativa sulla privacy">Longbara — Privacy Policy</title>
+<meta name="description"
+      data-en="What Longbara stores, what it never collects, and how to change your mind about ads."
+      data-it="Cosa salva Longbara, cosa non raccoglie mai, e come cambiare idea sugli annunci."
+      content="What Longbara stores, what it never collects, and how to change your mind about ads.">
+<link rel="canonical" href="https://www.mugenbyte.com/longbara/privacy">
+<link rel="icon" href="/longbara/assets/icon.png" type="image/png">
+<link rel="stylesheet" href="/assets/shared.css">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/longbara/longbara.css">
+<script src="/assets/mugenbyte.js"></script>
+<style> main { max-width: 62rem; } </style>
 </head>
 <body>
-
-<main>
-  <div class="masthead">
-    <a class="wordmark" href="/">Pietro Sardaro Apps</a>
-    <span class="muted">Longbara</span>
+<main class="legal">
+  <div class="app-head">
+    <a class="back" href="/longbara/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Longbara</a>
+    <ul class="lang" aria-label="Language">
+      <li><button type="button" data-lang="en" aria-pressed="true"><span>EN</span></button></li>
+      <li><button type="button" data-lang="it" aria-pressed="false"><span>IT</span></button></li>
+    </ul>
   </div>
 
-  <header class="head">
+  <header class="legal-head">
     <p class="eyebrow rise">Privacy</p>
-    <h1 class="rise">What Longbara knows about you.</h1>
-    <p class="stamp muted rise">Last updated 20 August 2026</p>
+    <h1 class="rise" lang="en">What Longbara knows about you.</h1>
+    <h1 class="rise" lang="it">Cosa sa Longbara di te.</h1>
+    <p class="stamp muted rise" lang="en">Last updated 4 September 2026</p>
+    <p class="stamp muted rise" lang="it">Ultimo aggiornamento: 4 settembre 2026</p>
   </header>
 
-  <p class="summary rise">
-    Almost nothing. There are <strong>no accounts and no servers</strong> — your progress never
-    leaves your phone, and the developer receives no personal data at all. The one exception is
-    advertising: the game shows ads through Google, and Google collects data to deliver them.
-    In Europe you are asked first, and you can change your answer whenever you like.
+  <p class="summary rise" lang="en">
+    Almost nothing. There are <strong>no accounts and no servers</strong>: your progress never leaves your phone, and the developer receives no personal data at all. The one exception is advertising: the game shows ads through Google, and Google collects data to deliver them. In Europe you are asked first, and you can change your answer whenever you like.
+  </p>
+  <p class="summary rise" lang="it">
+    Quasi niente. <strong>Non ci sono account né server</strong>: i tuoi progressi non lasciano mai il telefono, e lo sviluppatore non riceve alcun dato personale. L'unica eccezione è la pubblicità: il gioco mostra annunci tramite Google, e Google raccoglie dati per fornirli. In Europa ti viene chiesto prima, e puoi cambiare risposta quando vuoi.
   </p>
 
   <section>
-    <h2>Who is responsible</h2>
-    <div>
-      <p>Longbara is developed and published by <strong>Pietro Sardaro Apps</strong>, the trading
-         name of Pietro Sardaro, an individual developer based in Italy. For any question about
-         this policy or about your data, write to
-         <a href="mailto:pietro.sardaro@outlook.com">pietro.sardaro@outlook.com</a>.</p>
+    <h2 lang="en">Who is responsible</h2><h2 lang="it">Chi è il titolare</h2>
+    <div lang="en">
+      <p>Longbara is developed and published by <strong>Mugenbyte</strong>, the trading name of Pietro Sardaro, an individual developer based in Italy. Mugenbyte is the data controller for anything described here. For any question about this policy or about your data, write to <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a>.</p>
+    </div>
+    <div lang="it">
+      <p>Longbara è sviluppato e pubblicato da <strong>Mugenbyte</strong>, nome commerciale di Pietro Sardaro, sviluppatore individuale con sede in Italia. Mugenbyte è il titolare del trattamento per quanto descritto qui. Per qualsiasi domanda su questa informativa o sui tuoi dati scrivi a <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a>.</p>
     </div>
   </section>
 
   <section>
-    <h2>Stored on your device</h2>
-    <div>
-      <p>The game saves a small amount of information locally, using the standard storage
-         provided by the operating system. It is never transmitted anywhere:</p>
+    <h2 lang="en">Stored on your device</h2><h2 lang="it">Salvato sul tuo dispositivo</h2>
+    <div lang="en">
+      <p>The game saves a small amount of information locally, using the standard storage provided by the operating system. It is never transmitted anywhere:</p>
       <ul>
-        <li>the highest level you have completed;</li>
-        <li>the coins you have collected and which collectibles you have already claimed;</li>
+        <li>the levels you have completed and your best result on each;</li>
+        <li>the mandarins you have collected and your daily series;</li>
         <li>how many hints you have left and how many you have earned;</li>
         <li>your music, sound effects and vibration preferences;</li>
-        <li>whether you have already seen the tutorial.</li>
+        <li>whether you have already seen the tutorial;</li>
+        <li>a counter of levels played since the last ad, used only to space ads out.</li>
       </ul>
       <p>None of this identifies you. Uninstalling the game deletes all of it.</p>
     </div>
+    <div lang="it">
+      <p>Il gioco salva poche informazioni in locale, usando lo spazio standard messo a disposizione dal sistema operativo. Non vengono mai trasmesse da nessuna parte:</p>
+      <ul>
+        <li>i livelli completati e il miglior risultato su ciascuno;</li>
+        <li>i mandarini raccolti e la tua serie giornaliera;</li>
+        <li>quanti suggerimenti ti restano e quanti ne hai guadagnati;</li>
+        <li>le preferenze su musica, effetti sonori e vibrazione;</li>
+        <li>se hai già visto il tutorial;</li>
+        <li>un contatore dei livelli giocati dall'ultimo annuncio, usato solo per distanziare gli annunci.</li>
+      </ul>
+      <p>Niente di tutto questo ti identifica. Disinstallando il gioco si cancella tutto.</p>
+    </div>
   </section>
 
   <section>
-    <h2>What the game never does</h2>
-    <div>
+    <h2 lang="en">What the game never does</h2><h2 lang="it">Cosa il gioco non fa mai</h2>
+    <div lang="en">
       <ul>
         <li>No user accounts, no login, no cloud save.</li>
         <li>No analytics, no crash reporting, no usage tracking of its own.</li>
@@ -130,16 +89,20 @@
         <li>It does not sell your personal information.</li>
       </ul>
     </div>
+    <div lang="it">
+      <ul>
+        <li>Niente account utente, niente login, niente salvataggio in cloud.</li>
+        <li>Niente analitiche, niente segnalazione degli errori, nessun tracciamento d'uso proprio.</li>
+        <li>Nessun accesso a contatti, foto, microfono, fotocamera o posizione precisa.</li>
+        <li>Non vende le tue informazioni personali.</li>
+      </ul>
+    </div>
   </section>
 
   <section>
-    <h2>Advertising</h2>
-    <div>
-      <p>Longbara is free and is paid for by advertising. Ads are provided by
-         <strong>Google AdMob</strong>, a service of Google Ireland Limited. Two formats are used:
-         a banner at the bottom of the screen, and an optional video you can choose to watch in
-         exchange for extra hints. Watching a video is always your choice — the game is fully
-         playable without it.</p>
+    <h2 lang="en">Advertising</h2><h2 lang="it">Pubblicità</h2>
+    <div lang="en">
+      <p>Longbara is free and is paid for by advertising. Ads are provided by <strong>Google AdMob</strong>, a service of Google Ireland Limited. Two formats are used: a banner at the bottom of the screen, and an optional video you can choose to watch in exchange for extra hints. Watching a video is always your choice: the game is fully playable without it.</p>
       <p>To deliver and measure those ads, Google may collect and process:</p>
       <ul>
         <li>your device's advertising identifier;</li>
@@ -147,82 +110,85 @@
         <li>technical information about your device, such as model and operating system version;</li>
         <li>your interactions with the ads, such as views and taps.</li>
       </ul>
-      <p>This processing is governed by Google's own privacy policy. You can read how Google uses
-         this data at
-         <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>,
-         and see the list of advertising partners at
-         <a href="https://support.google.com/admob/answer/9012903">support.google.com/admob/answer/9012903</a>.</p>
+      <p>This processing is governed by Google's own privacy policy. You can read how Google uses this data at <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>, and see the list of advertising partners at <a href="https://support.google.com/admob/answer/9012903">support.google.com/admob/answer/9012903</a>.</p>
+    </div>
+    <div lang="it">
+      <p>Longbara è gratuito e si sostiene con la pubblicità. Gli annunci sono forniti da <strong>Google AdMob</strong>, un servizio di Google Ireland Limited. Si usano due formati: un banner in fondo allo schermo e un video facoltativo che puoi scegliere di guardare in cambio di suggerimenti extra. Guardare un video è sempre una tua scelta: il gioco è interamente giocabile senza.</p>
+      <p>Per fornire e misurare quegli annunci, Google può raccogliere e trattare:</p>
+      <ul>
+        <li>l'identificatore pubblicitario del tuo dispositivo;</li>
+        <li>il tuo indirizzo IP e l'area approssimativa (per esempio il paese) che ne deriva;</li>
+        <li>informazioni tecniche sul dispositivo, come modello e versione del sistema operativo;</li>
+        <li>le tue interazioni con gli annunci, come visualizzazioni e tocchi.</li>
+      </ul>
+      <p>Questo trattamento è regolato dall'informativa sulla privacy di Google. Puoi leggere come Google usa questi dati su <a href="https://policies.google.com/technologies/partner-sites?hl=it">policies.google.com/technologies/partner-sites</a> e vedere l'elenco dei partner pubblicitari su <a href="https://support.google.com/admob/answer/9012903?hl=it">support.google.com/admob/answer/9012903</a>.</p>
     </div>
   </section>
 
   <section>
-    <h2>Your consent</h2>
-    <div>
-      <p>Where the law requires it — including the European Economic Area, the United Kingdom and
-         Switzerland — the game asks for your consent before showing personalised ads, using
-         Google's User Messaging Platform. Your choice is remembered, and it is respected.</p>
-      <p><strong>You can change your mind at any time.</strong> Open the level list, and in the
-         settings row at the bottom tap the padlock icon: the same consent screen opens again.</p>
-      <p>If you decline, the game keeps working exactly as before. You will still see ads, but they
-         will not be personalised — Google still processes a limited amount of data, such as your
-         IP address, to serve a non-personalised ad, to limit how often you see the same one, and
-         to prevent fraud.</p>
-      <p>On iPhone and iPad, the system also asks separately whether apps may track you. You can
-         review that answer at any time in <code>Settings › Privacy &amp; Security › Tracking</code>.</p>
-      <p>If you live in a US state with applicable privacy legislation, you can opt out of the sale
-         or sharing of your personal information through the same screen in the game's settings.</p>
+    <h2 lang="en">Your consent</h2><h2 lang="it">Il tuo consenso</h2>
+    <div lang="en">
+      <p>Where the law requires it, including the European Economic Area, the United Kingdom and Switzerland, the game asks for your consent before showing personalised ads, using Google's User Messaging Platform. Your choice is remembered, and it is respected.</p>
+      <p><strong>You can change your mind at any time.</strong> Open Settings from the home screen (the gear icon) and tap <em>Ad privacy options</em>: the same consent screen opens again.</p>
+      <p>If you decline, the game keeps working exactly as before. You will still see ads, but they will not be personalised. Google still processes a limited amount of data, such as your IP address, to serve a non-personalised ad, to limit how often you see the same one, and to prevent fraud.</p>
+      <p>On iPhone and iPad, the system also asks separately whether apps may track you. You can review that answer at any time in <code>Settings › Privacy &amp; Security › Tracking</code>.</p>
+      <p>If you live in a US state with applicable privacy legislation, you can opt out of the sale or sharing of your personal information through the same screen in the game's settings.</p>
+    </div>
+    <div lang="it">
+      <p>Dove la legge lo richiede, compresi lo Spazio economico europeo, il Regno Unito e la Svizzera, il gioco chiede il tuo consenso prima di mostrare annunci personalizzati, tramite la User Messaging Platform di Google. La tua scelta viene ricordata e rispettata.</p>
+      <p><strong>Puoi cambiare idea in qualsiasi momento.</strong> Apri le Impostazioni dalla schermata iniziale (l'ingranaggio) e tocca <em>Opzioni privacy per gli annunci</em>: si riapre la stessa schermata di consenso.</p>
+      <p>Se rifiuti, il gioco continua a funzionare esattamente come prima. Vedrai comunque annunci, ma non personalizzati. Google tratta ugualmente una quantità limitata di dati, come l'indirizzo IP, per mostrare un annuncio non personalizzato, limitare quante volte vedi lo stesso e prevenire le frodi.</p>
+      <p>Su iPhone e iPad il sistema chiede separatamente anche se le app possono tracciarti. Puoi rivedere quella risposta in qualsiasi momento in <code>Impostazioni › Privacy e sicurezza › Tracciamento</code>.</p>
+      <p>Se vivi in uno stato degli USA con una legge sulla privacy applicabile, puoi rifiutare la vendita o la condivisione delle tue informazioni personali dalla stessa schermata nelle impostazioni del gioco.</p>
     </div>
   </section>
 
   <section>
-    <h2>Children</h2>
-    <div>
-      <p>Longbara is not directed to children, and it is not designed or marketed for them. The
-         developer does not knowingly collect personal information from children. If you believe a
-         child has provided personal information through this game, please write to the address
-         above and it will be addressed.</p>
+    <h2 lang="en">Children</h2><h2 lang="it">Minori</h2>
+    <div lang="en">
+      <p>Longbara is not directed to children, and it is not designed or marketed for them. The developer does not knowingly collect personal information from children. If you believe a child has provided personal information through this game, please write to the address above and it will be addressed.</p>
+    </div>
+    <div lang="it">
+      <p>Longbara non è rivolto ai bambini e non è progettato né promosso per loro. Lo sviluppatore non raccoglie consapevolmente informazioni personali dai minori. Se ritieni che un minore abbia fornito informazioni personali tramite questo gioco, scrivi all'indirizzo sopra e la cosa verrà gestita.</p>
     </div>
   </section>
 
   <section>
-    <h2>Your rights</h2>
-    <div>
-      <p>Under the GDPR and comparable laws, you have the right to access, correct, delete,
-         restrict, or object to the processing of your personal data, and the right to lodge a
-         complaint with your data protection authority. In Italy, that is the Garante per la
-         protezione dei dati personali.</p>
-      <p>Because the developer holds no personal data about you, requests concerning advertising
-         data must be directed to Google, who acts as the controller for that processing. The links
-         in the Advertising section above explain how. For anything stored on your device,
-         uninstalling the game removes it immediately and completely.</p>
+    <h2 lang="en">Your rights</h2><h2 lang="it">I tuoi diritti</h2>
+    <div lang="en">
+      <p>Under the GDPR and comparable laws, you have the right to access, correct, delete, restrict, or object to the processing of your personal data, and the right to lodge a complaint with your data protection authority. In Italy, that is the Garante per la protezione dei dati personali.</p>
+      <p>Because the developer holds no personal data about you, requests concerning advertising data must be directed to Google, who acts as the controller for that processing. The links in the Advertising section above explain how. For anything stored on your device, uninstalling the game removes it immediately and completely.</p>
+    </div>
+    <div lang="it">
+      <p>Ai sensi del GDPR e delle leggi analoghe hai il diritto di accedere ai tuoi dati personali, correggerli, cancellarli, limitarne il trattamento o opporti, e il diritto di presentare reclamo alla tua autorità di controllo. In Italia è il Garante per la protezione dei dati personali.</p>
+      <p>Poiché lo sviluppatore non detiene alcun dato personale su di te, le richieste relative ai dati pubblicitari vanno rivolte a Google, che è titolare di quel trattamento. I collegamenti nella sezione Pubblicità spiegano come. Per quanto salvato sul tuo dispositivo, disinstallare il gioco lo rimuove subito e del tutto.</p>
     </div>
   </section>
 
   <section>
-    <h2>Data retention</h2>
-    <div>
-      <p>Data stored on your device remains there until you delete the game. Data collected by
-         Google for advertising is retained according to Google's own retention policies, described
-         in the links above.</p>
+    <h2 lang="en">Data retention</h2><h2 lang="it">Conservazione dei dati</h2>
+    <div lang="en">
+      <p>Data stored on your device remains there until you delete the game. Data collected by Google for advertising is retained according to Google's own retention policies, described in the links above.</p>
+    </div>
+    <div lang="it">
+      <p>I dati salvati sul tuo dispositivo restano lì finché non cancelli il gioco. I dati raccolti da Google per la pubblicità sono conservati secondo le politiche di conservazione di Google, descritte nei collegamenti sopra.</p>
     </div>
   </section>
 
   <section>
-    <h2>Changes</h2>
-    <div>
-      <p>If this policy changes, the revised version is published on this page with a new date at
-         the top. Significant changes affecting how your data is handled will also be reflected in
-         the consent screen shown inside the game.</p>
+    <h2 lang="en">Changes</h2><h2 lang="it">Modifiche</h2>
+    <div lang="en">
+      <p>If this policy changes, the revised version is published on this page with a new date at the top. Significant changes affecting how your data is handled will also be reflected in the consent screen shown inside the game.</p>
+    </div>
+    <div lang="it">
+      <p>Se questa informativa cambia, la versione aggiornata viene pubblicata su questa pagina con una nuova data in alto. Le modifiche rilevanti sul modo in cui i tuoi dati vengono trattati si rifletteranno anche nella schermata di consenso mostrata nel gioco.</p>
     </div>
   </section>
 
-  <footer class="muted">
-    <a href="/">Pietro Sardaro Apps</a>
-    <span>© <span id="year">2026</span></span>
-    <a href="mailto:pietro.sardaro@outlook.com">pietro.sardaro@outlook.com</a>
+  <footer class="app-foot muted">
+    <span><a href="/longbara/">Longbara</a> · <a href="/">Mugenbyte</a></span>
+    <span>© <span id="year">2026</span> Mugenbyte · <a href="mailto:support@mugenbyte.com">support@mugenbyte.com</a></span>
   </footer>
 </main>
-
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

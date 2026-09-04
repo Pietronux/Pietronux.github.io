@@ -1,0 +1,200 @@
+/* Mugenbyte — inchiostro e carta.
+   Lo stile della casa, non di un'app: carta calda, inchiostro blu-nero, un
+   solo accento (il vermiglio del bit acceso). Le app portano ciascuna la
+   propria palette dentro la loro fascia. */
+
+:root {
+  --paper: #F6F1E8;
+  --paper-2: #FBF8F2;
+  --ink: #161A23;
+  --ink-2: #3E4350;
+  --mute: #8C867B;
+  --line: #E2DBCE;
+  --line-2: #C9C2B4;
+  --hot: #E3462B;
+  --lang-on: var(--paper);
+
+  --edge: clamp(1.25rem, 5vw, 4rem);
+  --measure: 34rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14171E;
+    --paper-2: #1C2028;
+    --ink: #F1ECE2;
+    --ink-2: #C5BFB3;
+    --mute: #7E7A72;
+    --line: #2A2F3A;
+    --line-2: #3A404C;
+    --lang-on: var(--paper);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 clamp(1rem, .96rem + .2vw, 1.075rem)/1.6 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-stretch: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--hot); }
+p { margin: 0 0 1em; max-width: var(--measure); text-wrap: pretty; }
+h1, h2, h3 { margin: 0; font-weight: 800; font-stretch: 118%; letter-spacing: -.035em; line-height: 1; text-wrap: balance; }
+h1 { font-size: clamp(2.7rem, 1.2rem + 4.9vw, 5.6rem); line-height: .96; letter-spacing: -.04em; }
+h2 { font-size: clamp(1.9rem, 1.3rem + 2.4vw, 2.75rem); line-height: 1.04; }
+h3 { font-size: 1.35rem; letter-spacing: -.02em; line-height: 1.15; font-stretch: 100%; }
+
+.eyebrow {
+  font: 500 .72rem/1 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+}
+.muted { color: var(--ink-2); }
+.wide { font-stretch: 118%; }
+
+/* --- carta a puntini: la trama del foglio, non una griglia di gioco --- */
+.dots {
+  background-image: radial-gradient(var(--line-2) 1px, transparent 1.2px);
+  background-size: 28px 28px;
+}
+
+/* --- il mark --- */
+.mark { display: inline-block; height: auto; }
+.mark svg { display: block; width: 100%; height: auto; }
+.mark .bit { fill: currentColor; }
+
+/* --- testata --- */
+.site-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.1rem var(--edge);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: inline-flex; align-items: center; gap: .7rem; }
+.brand .mark { width: 2.4rem; }
+.brand .wordmark { font-weight: 700; font-stretch: 118%; font-size: 1.2rem; letter-spacing: -.025em; }
+.site-nav { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.2rem); font-weight: 500; font-size: .95rem; }
+@media (max-width: 40rem) { .site-nav > a { display: none; } }
+
+/* --- apertura --- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2.5rem; align-items: center;
+  padding: clamp(3rem, 8vw, 6rem) var(--edge) clamp(3rem, 7vw, 5.5rem);
+}
+.hero > div:first-child { display: flex; flex-direction: column; gap: 1.6rem; }
+.hero .lede { font-size: clamp(1.1rem, 1rem + .6vw, 1.3rem); line-height: 1.5; color: var(--ink-2); margin: 0; max-width: 30rem; }
+.hero .mark { width: min(100%, 36rem); justify-self: end; }
+.hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+@media (max-width: 52rem) {
+  .hero { grid-template-columns: 1fr; gap: 2rem; }
+  .hero .mark { width: min(70%, 22rem); justify-self: start; order: -1; }
+}
+
+.button {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .85rem 1.4rem; border-radius: 999px; font-weight: 600; font-size: .95rem;
+  background: var(--ink); color: var(--paper); border: 0; cursor: pointer; font-family: inherit;
+  transition: transform .25s cubic-bezier(.16,1,.3,1), background-color .25s;
+}
+.button:hover { transform: translateY(-2px); background: var(--hot); color: #fff; }
+.button--hot { background: var(--hot); color: #fff; }
+.button--hot:hover { background: var(--ink); color: var(--paper); }
+.button svg { width: 1em; height: 1em; }
+
+/* --- catalogo --- */
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  padding: 2.4rem var(--edge) 1.2rem; border-top: 1px solid var(--line);
+}
+.section-head p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+
+.apps { display: grid; gap: 1.25rem; padding: 0 var(--edge); }
+
+/* Una fascia per app. I colori vengono dalle variabili --a-* che ogni fascia
+   dichiara inline: sono la palette dell'app, non della casa. */
+.app {
+  --a-bg: var(--paper-2); --a-ink: var(--ink); --a-mute: var(--ink-2); --a-chip: var(--line);
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2.5rem; align-items: center;
+  padding: clamp(1.8rem, 4vw, 3.5rem) clamp(1.4rem, 4vw, 3.75rem);
+  border-radius: 1.25rem; background: var(--a-bg); color: var(--a-ink);
+  position: relative; overflow: hidden;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
+}
+.app:hover { color: var(--a-ink); transform: translateY(-3px); box-shadow: 0 18px 44px color-mix(in oklab, var(--a-ink) 16%, transparent); }
+.app-text { display: flex; flex-direction: column; gap: 1.2rem; }
+.app-head { display: flex; align-items: center; gap: 1.2rem; }
+.app-icon { width: clamp(64px, 10vw, 84px); height: auto; border-radius: 24%; flex: none;
+            box-shadow: 0 10px 26px color-mix(in oklab, var(--a-ink) 22%, transparent); }
+.app-head h3 { font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.75rem); line-height: 1; }
+.app-head p { margin: .3rem 0 0; color: var(--a-mute); font-size: 1.02rem; }
+.app p { max-width: 28rem; }
+.app-foot { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.chip {
+  font: 500 .68rem/1 'JetBrains Mono', ui-monospace, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase;
+  padding: .55rem .8rem; border-radius: 999px; background: var(--a-chip); color: var(--a-ink);
+}
+.app-cta { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: .95rem; }
+.app-cta svg { width: 1em; height: 1em; transition: transform .25s; }
+.app:hover .app-cta svg { transform: translateX(4px); }
+.app-art { position: relative; min-height: 14rem; }
+@media (max-width: 52rem) {
+  .app { grid-template-columns: 1fr; }
+  .app-art { min-height: 11rem; }
+}
+
+/* --- promesse --- */
+.about {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(3.5rem, 8vw, 6rem) var(--edge); margin-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--line);
+}
+.about > div:first-child { display: flex; flex-direction: column; gap: 1.1rem; }
+.promises { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+.promise {
+  display: flex; flex-direction: column; gap: .8rem; padding: 1.5rem;
+  border: 1px solid var(--ink); border-radius: .9rem;
+}
+.promise .n { font: 500 .78rem/1 'JetBrains Mono', ui-monospace, Menlo, monospace; color: var(--hot); }
+.promise p { margin: 0; font-size: .95rem; line-height: 1.5; color: var(--ink-2); }
+@media (max-width: 60rem) { .about { grid-template-columns: 1fr; } }
+@media (max-width: 44rem) { .promises { grid-template-columns: 1fr; } }
+
+/* --- contatto --- */
+.contact {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(3rem, 7vw, 5.5rem) var(--edge) clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--line);
+}
+.contact > div:first-child { display: flex; flex-direction: column; gap: 1.1rem; }
+form { display: grid; gap: .9rem; }
+label { display: grid; gap: .4rem; }
+label > span { font: 500 .68rem/1 'JetBrains Mono', ui-monospace, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+input, textarea {
+  font: inherit; color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--line-2); border-radius: .65rem; padding: .75rem .9rem; width: 100%;
+}
+input:focus-visible, textarea:focus-visible { outline: 2px solid var(--hot); outline-offset: 2px; border-color: transparent; }
+textarea { min-height: 7.5rem; resize: vertical; }
+.note { font-size: .85rem; color: var(--mute); margin: 0; }
+@media (max-width: 52rem) { .contact { grid-template-columns: 1fr; } }
+
+/* --- piede --- */
+.site-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: .8rem 1.6rem; flex-wrap: wrap;
+  padding: 1.6rem var(--edge); border-top: 1px solid var(--ink); font-size: .85rem; color: var(--ink-2);
+}
+.site-foot .brand .mark { width: 1.5rem; }
+
+/* --- entrata --- */
+.rise { opacity: 0; transform: translateY(14px); animation: rise .9s cubic-bezier(.16,1,.3,1) forwards; }
+.rise:nth-child(2) { animation-delay: .06s; }
+.rise:nth-child(3) { animation-delay: .12s; }
+.rise:nth-child(4) { animation-delay: .18s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; } }

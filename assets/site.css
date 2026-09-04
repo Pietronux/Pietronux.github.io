@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Fraunces';
-  src: url('fraunces-latin.woff2') format('woff2-variations');
+  src: url('fonts/fraunces-latin.woff2') format('woff2-variations');
   font-weight: 300 900;
   font-style: normal;
   font-display: swap;
@@ -35,22 +35,6 @@
 [data-world="cacao"]    { --sky:#F3E5D6; --board:#E5D0B8; --ground:#D2B694; --block:#8A6446; --body:#9C6338; --ink:#3B2718; --accent:#D9884A; }
 [data-world="rosa"]     { --sky:#FAE6E7; --board:#F2CFD4; --ground:#E7B6BF; --block:#AE6A7A; --body:#B5825C; --ink:#48292F; --accent:#E5828F; }
 [data-world="muschio"]  { --sky:#F4F2D8; --board:#E5E5B8; --ground:#D3D69B; --block:#78854C; --body:#B4844A; --ink:#383B20; --accent:#DDA047; }
-
-/* Scuro: non un tema inventato, ma la stessa ambientazione girata.
-   L'inchiostro diventa il fondo, il cielo diventa il testo. */
-@media (prefers-color-scheme: dark) {
-  :root { color-scheme: dark; }
-  body { background: var(--ink); color: var(--sky); }
-  body::before { opacity: .10; }
-  .rule { background: color-mix(in oklab, var(--sky) 22%, transparent); }
-  .muted { color: color-mix(in oklab, var(--sky) 66%, var(--ink)); }
-  .chip { border-color: color-mix(in oklab, var(--sky) 24%, transparent); color: var(--sky); }
-  .chip[aria-pressed="true"] { background: var(--sky); color: var(--ink); border-color: var(--sky); }
-  input, textarea { background: color-mix(in oklab, var(--sky) 8%, transparent); color: var(--sky);
-                    border-color: color-mix(in oklab, var(--sky) 22%, transparent); }
-  .tile { background: color-mix(in oklab, var(--sky) 12%, transparent); }
-  .tile--filled { background: color-mix(in oklab, var(--body) 80%, var(--ink)); }
-}
 
 * { box-sizing: border-box; }
 
@@ -120,4 +104,23 @@ a:hover { text-decoration-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .rise { opacity: 1; transform: none; }
+}
+
+/* Scuro: non un tema inventato, ma la stessa ambientazione girata.
+   L'inchiostro diventa il fondo, il cielo diventa il testo.
+   Sta in fondo al foglio apposta: a parita' di specificita' vince l'ultima
+   regola, e messo prima di body{} non avrebbe mai effetto. */
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; }
+  body { background: var(--ink); color: var(--sky); }
+  body::before { opacity: .10; }
+  .rule { background: color-mix(in oklab, var(--sky) 22%, transparent); }
+  .muted { color: color-mix(in oklab, var(--sky) 66%, var(--ink)); }
+  .eyebrow { color: color-mix(in oklab, var(--sky) 58%, var(--ink)); }
+  .chip { border-color: color-mix(in oklab, var(--sky) 24%, transparent); color: var(--sky); }
+  .chip[aria-pressed="true"] { background: var(--sky); color: var(--ink); border-color: var(--sky); }
+  input, textarea { background: color-mix(in oklab, var(--sky) 8%, transparent); color: var(--sky);
+                    border-color: color-mix(in oklab, var(--sky) 22%, transparent); }
+  .tile { background: color-mix(in oklab, var(--sky) 12%, transparent); }
+  .tile--filled { background: color-mix(in oklab, var(--body) 80%, var(--ink)); }
 }

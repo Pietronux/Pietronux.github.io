@@ -1,0 +1,57 @@
+/* Mugenbyte — la parte comune a TUTTE le pagine del sito, di qualunque app.
+   Qui stanno solo: i font self-hosted (il sito non carica nulla da terzi),
+   il meccanismo delle due lingue e l'interruttore EN/IT. Lo stile di ogni
+   pagina (colori, tipografia, impaginazione) sta nel suo foglio. */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('fonts/archivo-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/jetbrains-mono-latin.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- due lingue, un file ---
+   Ogni blocco di testo porta lang="en" o lang="it"; mugenbyte.js mette
+   data-lang sull'elemento radice PRIMA che la pagina venga disegnata, e
+   qui si nasconde la lingua che non serve. Senza JavaScript si vedono
+   entrambe: meglio doppio che vuoto. */
+html[data-lang="en"] [lang="it"],
+html[data-lang="it"] [lang="en"] { display: none !important; }
+
+/* --- interruttore EN / IT ---
+   Disegnato con currentColor, cosi' prende il colore della pagina che lo
+   ospita: inchiostro sulla carta, verde bosco su Longbara, bruno su Capydoku. */
+.lang {
+  display: inline-flex; padding: 0; margin: 0; list-style: none;
+  border: 1px solid currentColor; border-radius: 999px; overflow: hidden;
+  font: 500 .74rem/1 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  letter-spacing: .06em;
+}
+.lang button {
+  font: inherit; color: inherit; background: transparent; border: 0;
+  padding: .55rem .8rem; cursor: pointer; min-width: 2.75rem;
+  transition: background-color .2s, color .2s;
+}
+.lang button[aria-pressed="true"] { background: currentColor; }
+.lang button[aria-pressed="true"] > span { color: var(--lang-on, #fff); }
+.lang button:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+
+.mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

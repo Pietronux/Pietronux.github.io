@@ -1,0 +1,61 @@
+/* Longbara — quello che le tre pagine del gioco (scheda, privacy, termini)
+   hanno in comune oltre a site.css: la testata che riporta a Mugenbyte,
+   il piede, e l'impaginazione "da rivista" delle pagine legali. */
+
+:root { --lang-on: var(--sky); }
+@media (prefers-color-scheme: dark) { :root { --lang-on: var(--ink); } }
+
+.app-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem) 0 0;
+}
+.back {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font: 500 .8rem/1 'JetBrains Mono', ui-monospace, Menlo, monospace; letter-spacing: .06em;
+  text-decoration: none;
+}
+.back svg { width: 1rem; height: 1rem; transition: transform .25s; }
+.back:hover svg { transform: translateX(-3px); }
+
+.app-foot {
+  margin-top: clamp(3rem, 8vw, 5rem); padding-top: 1.4rem;
+  border-top: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+  font-size: .86rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 1.6rem;
+}
+.app-foot a { text-decoration: none; }
+
+/* --- pagine legali --- */
+.legal-head { padding: clamp(3rem, 9vw, 6rem) 0 clamp(2rem, 5vw, 3rem); }
+.legal-head h1 { font-size: clamp(2.4rem, 1.5rem + 4vw, 5rem); max-width: 16ch; }
+.stamp { font-size: .84rem; letter-spacing: .04em; margin-top: 1.4rem; }
+
+.summary {
+  font-size: clamp(1.1rem, 1rem + .6vw, 1.45rem); line-height: 1.55; max-width: 38rem;
+  font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'opsz' 30, 'SOFT' 30; font-weight: 400;
+  margin: 0 0 clamp(3rem, 8vw, 5rem);
+}
+.summary strong { font-weight: 700; }
+.summary::after { content: ""; display: block; width: 3.5rem; height: 3px; border-radius: 2px; background: var(--accent); margin-top: 1.8rem; }
+
+.legal section {
+  display: grid; gap: .4rem clamp(2rem, 5vw, 4rem);
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  padding: clamp(1.8rem, 4vw, 2.6rem) 0;
+  border-top: 1px solid color-mix(in oklab, currentColor 16%, transparent);
+}
+.legal section h2 {
+  font-size: clamp(1.05rem, .95rem + .4vw, 1.3rem); font-variation-settings: 'opsz' 18, 'SOFT' 30;
+  position: sticky; top: 1.5rem; align-self: start;
+}
+.legal section > div > :last-child { margin-bottom: 0; }
+@media (max-width: 48rem) {
+  .legal section { grid-template-columns: 1fr; gap: .9rem; }
+  .legal section h2 { position: static; }
+}
+.legal ul { padding-left: 1.1rem; margin: 0 0 1.1em; max-width: var(--measure); }
+.legal li { margin: .3rem 0; }
+.legal li::marker { color: var(--accent); }
+code {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: .86em;
+  background: color-mix(in oklab, currentColor 9%, transparent); padding: .12em .4em; border-radius: .35rem;
+}

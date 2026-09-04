@@ -1,277 +1,204 @@
 <!doctype html>
-<html lang="en" data-world="bosco">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pietro Sardaro Apps — small, handmade mobile games</title>
-<meta name="description" content="Independent game developer in Italy. Maker of Longbara, a calm sliding-path puzzle.">
-<link rel="icon" href="assets/capybara.png">
-<link rel="stylesheet" href="assets/site.css">
+<title data-en="Mugenbyte — small apps, endless care" data-it="Mugenbyte — piccole app, cura infinita">Mugenbyte — small apps, endless care</title>
+<meta name="description"
+      data-en="Mugenbyte is a one-person studio in Puglia, Italy, making small mobile apps of different kinds. No accounts, no tracking of its own."
+      data-it="Mugenbyte è uno studio di una persona sola in Puglia che fa piccole app per telefono di tipi diversi. Niente account, nessun tracciamento proprio."
+      content="Mugenbyte is a one-person studio in Puglia, Italy, making small mobile apps of different kinds. No accounts, no tracking of its own.">
+<link rel="canonical" href="https://www.mugenbyte.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mugenbyte">
+<meta property="og:title" content="Mugenbyte — small apps, endless care">
+<meta property="og:description" content="A one-person studio in Puglia, Italy, making small mobile apps of different kinds.">
+<meta property="og:url" content="https://www.mugenbyte.com/">
+<meta property="og:image" content="https://www.mugenbyte.com/assets/brand/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F1E8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171E" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/shared.css">
+<link rel="stylesheet" href="/assets/mugenbyte.css">
+<script src="/assets/mugenbyte.js"></script>
 <style>
-  .masthead {
-    display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
-    padding: clamp(1.75rem, 4vw, 3rem) 0 0;
+  /* La board in miniatura di Longbara: non un ornamento,
+     e' il gioco visto da lontano. */
+  .board {
+    position: absolute; right: clamp(4rem, 30%, 9rem); top: 0;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: .35rem; width: min(100%, 15rem);
+    padding: .7rem; border-radius: 1.1rem; background: #D3E2C4;
   }
-  .wordmark {
-    font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'opsz' 14;
-    font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em;
-  }
-  .masthead .muted { font-size: .88rem; }
-
-  /* --- apertura --- */
-  .hero { position: relative; padding: clamp(3.5rem, 11vw, 8rem) 0 clamp(2rem, 5vw, 3.5rem); }
-  .hero h1 { max-width: 15ch; }
-  .hero h1 em {
-    font-style: normal; font-variation-settings: 'opsz' 144, 'SOFT' 90, 'WONK' 1;
-    color: var(--block);
-  }
-  .lede { font-size: clamp(1.06rem, 1rem + .45vw, 1.3rem); max-width: 30rem; margin-top: 1.8rem; }
-
+  .tile { aspect-ratio: 1; border-radius: .4rem; background: #BCD2A8; }
+  .tile--path { background: #BC8A5C; }
+  .tile--block { background: #7FA46B; }
   .capy {
-    position: absolute; right: -4%; top: clamp(1rem, 4vw, 3rem);
-    /* height:auto e' obbligatorio: l'attributo height nell'HTML serve al browser a
-       riservare lo spazio prima del caricamento, ma senza questo vince su width e
-       l'immagine si schiaccia. */
-    width: clamp(120px, 26vw, 300px); height: auto; z-index: -1;
-    opacity: .96; rotate: 6deg;
-    filter: drop-shadow(0 18px 34px color-mix(in oklab, var(--ink) 22%, transparent));
+    position: absolute; right: -1.5rem; bottom: -3.5rem; width: clamp(9rem, 40%, 14rem); height: auto;
+    rotate: 8deg; filter: drop-shadow(0 16px 30px rgba(59,74,50,.25));
     animation: bob 7s ease-in-out infinite;
   }
-  @keyframes bob { 50% { transform: translateY(-11px) rotate(-2deg); } }
+  @keyframes bob { 50% { transform: translateY(-9px) rotate(-2deg); } }
 
-  /* --- selettore delle ambientazioni --- */
-  .worlds { margin: clamp(2.5rem, 6vw, 4rem) 0 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; padding: 0; list-style: none; }
-  .chip {
-    font: 600 .82rem/1 inherit; font-family: inherit;
-    padding: .5rem .85rem; border-radius: 999px; cursor: pointer;
-    background: transparent; color: var(--ink);
-    border: 1px solid color-mix(in oklab, var(--ink) 22%, transparent);
-    transition: background-color .25s, color .25s, border-color .25s, transform .25s cubic-bezier(.16,1,.3,1);
+  @media (max-width: 52rem) {
+    .app-art { min-height: 13rem; }
+    .board { right: auto; left: 0; }
   }
-  .chip:hover { transform: translateY(-2px); border-color: var(--block); }
-  .chip[aria-pressed="true"] { background: var(--ink); color: var(--sky); border-color: var(--ink); }
-
-  /* --- catalogo dei giochi ---
-     Una voce per gioco. Con uno solo si legge come una scheda di presentazione,
-     con tre come un catalogo: la stessa impaginazione regge entrambi i casi. */
-  .games { margin-top: clamp(4.5rem, 11vw, 8rem); }
-
-  .entry { padding: clamp(2.4rem, 6vw, 4rem) 0; border-top: 1px solid color-mix(in oklab, var(--ink) 14%, transparent); }
-  .entry:first-of-type { border-top: 0; padding-top: clamp(1rem, 3vw, 2rem); }
-
-  .entry-head { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 1.6rem); margin-bottom: 1.4rem; }
-  .entry-icon {
-    width: clamp(64px, 11vw, 92px); height: auto; flex: none;
-    border-radius: 24%;
-    box-shadow: 0 10px 26px color-mix(in oklab, var(--ink) 20%, transparent);
-  }
-  .entry-head h3 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); font-variation-settings: 'opsz' 60, 'SOFT' 40; }
-  .entry-head p { margin: .25rem 0 0; font-size: .95rem; }
-
-  .status {
-    display: inline-block; font: 600 .72rem/1 inherit; letter-spacing: .12em;
-    text-transform: uppercase; padding: .42rem .7rem; border-radius: 999px;
-    background: color-mix(in oklab, var(--accent) 26%, transparent);
-    color: color-mix(in oklab, var(--ink) 88%, var(--accent));
-    margin-bottom: 1rem;
-  }
-
-  .entry-body {
-    display: grid; gap: clamp(1.6rem, 4vw, 3.5rem);
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    align-items: start;
-  }
-  @media (max-width: 46rem) { .entry-body { grid-template-columns: 1fr; } }
-  .facts { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: .55rem; }
-  .facts li { display: flex; gap: .7rem; align-items: baseline; }
-  .facts li::before {
-    content: ""; width: .5rem; height: .5rem; border-radius: .16rem;
-    background: var(--accent); flex: none; translate: 0 -.1rem;
-  }
-
-  /* Una board in miniatura: le celle chiare sono da riempire,
-     quelle scure il percorso gia' fatto. E' il gioco, non un ornamento. */
-  .board {
-    display: grid; grid-template-columns: repeat(6, 1fr); gap: .4rem;
-    padding: .8rem; border-radius: 1.15rem;
-    background: color-mix(in oklab, var(--board) 78%, var(--sky));
-    box-shadow: 0 1px 0 color-mix(in oklab, var(--sky) 70%, #fff) inset;
-    max-width: 22rem;
-  }
-  .tile { aspect-ratio: 1; border-radius: .42rem; background: color-mix(in oklab, var(--ground) 70%, var(--board)); }
-  .tile--filled { background: var(--body); }
-  .tile--block { background: var(--block); }
-  .tile--head { background: var(--body); position: relative; }
-  .tile--head::after {
-    content: ""; position: absolute; inset: 18%;
-    border-radius: 50%; background: color-mix(in oklab, var(--body) 70%, #000);
-    opacity: .28;
-  }
-
-  /* --- contatto --- */
-  .contact { margin-top: clamp(4.5rem, 11vw, 8rem); }
-  form { display: grid; gap: 1rem; max-width: 32rem; margin-top: 1.6rem; }
-  label { display: grid; gap: .35rem; font-size: .84rem; font-weight: 600;
-          letter-spacing: .04em; text-transform: uppercase;
-          color: color-mix(in oklab, var(--ink) 62%, var(--sky)); }
-  input, textarea {
-    font: inherit; color: var(--ink); background: color-mix(in oklab, var(--sky) 55%, #fff);
-    border: 1px solid color-mix(in oklab, var(--ink) 18%, transparent);
-    border-radius: .7rem; padding: .7rem .85rem; width: 100%;
-  }
-  input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-color: transparent; }
-  textarea { min-height: 7.5rem; resize: vertical; }
-  button[type="submit"] {
-    justify-self: start; font: 600 1rem/1 inherit; font-family: inherit;
-    padding: .8rem 1.5rem; border: 0; border-radius: 999px; cursor: pointer;
-    background: var(--ink); color: var(--sky);
-    transition: transform .25s cubic-bezier(.16,1,.3,1), background-color .25s;
-  }
-  button[type="submit"]:hover { transform: translateY(-2px); background: var(--block); }
-  .note { font-size: .86rem; margin: 0; }
-
-  footer { margin-top: clamp(4rem, 9vw, 7rem); padding-top: 1.6rem; font-size: .88rem;
-           display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; align-items: baseline; }
 </style>
 </head>
 <body>
 
+<header class="site-head">
+  <a class="brand" href="/" aria-label="Mugenbyte">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 6 3"><rect class="bit" x="1.025" y="0.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="4.025" y="0.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="0.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="2.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="3.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="5.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="1.025" y="2.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="4.025" y="2.025" width="0.95" height="0.95" rx="0.03"/></svg></span>
+    <span class="wordmark">mugenbyte</span>
+  </a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="#apps" lang="en">Apps</a><a href="#apps" lang="it">App</a>
+    <a href="#about" lang="en">About</a><a href="#about" lang="it">Chi siamo</a>
+    <a href="#contact" lang="en">Contact</a><a href="#contact" lang="it">Contatti</a>
+    <ul class="lang" aria-label="Language">
+      <li><button type="button" data-lang="en" aria-pressed="true"><span>EN</span></button></li>
+      <li><button type="button" data-lang="it" aria-pressed="false"><span>IT</span></button></li>
+    </ul>
+  </nav>
+</header>
+
 <main>
-  <div class="masthead">
-    <span class="wordmark">Pietro Sardaro Apps</span>
-    <span class="muted">Independent games · Italy</span>
+  <section class="hero dots">
+    <div>
+      <p class="eyebrow rise" lang="en">Independent studio · Puglia, Italy</p>
+      <p class="eyebrow rise" lang="it">Studio indipendente · Puglia, Italia</p>
+      <h1 class="rise" lang="en">Small apps,<br>endless care.</h1>
+      <h1 class="rise" lang="it">Piccole app,<br>cura infinita.</h1>
+      <p class="lede rise" lang="en">One person, making small mobile apps of different kinds. Each one is built to do one thing well, and to leave you alone when you are done.</p>
+      <p class="lede rise" lang="it">Una persona sola, che fa piccole app per telefono di tipi diversi. Ognuna fa una cosa e la fa bene, e ti lascia in pace quando hai finito.</p>
+      <div class="hero-actions rise">
+        <a class="button" href="#apps"><span lang="en">See the apps</span><span lang="it">Guarda le app</span>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <span class="eyebrow" lang="en">01 released or in progress</span>
+        <span class="eyebrow" lang="it">01 uscita o in lavorazione</span>
+      </div>
+    </div>
+    <span class="mark rise" aria-hidden="true"><svg viewBox="0 0 6 3"><rect class="bit" x="1.025" y="0.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="4.025" y="0.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="0.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="2.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="3.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="5.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="1.025" y="2.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="4.025" y="2.025" width="0.95" height="0.95" rx="0.03"/></svg></span>
+  </section>
+
+  <div class="section-head" id="apps">
+    <span class="eyebrow" lang="en">Apps — 01</span>
+    <span class="eyebrow" lang="it">App — 01</span>
+    <p lang="en">Each app has its own page, its own look, and its own privacy policy.</p>
+    <p lang="it">Ogni app ha la sua pagina, il suo stile e la sua informativa sulla privacy.</p>
   </div>
 
-  <header class="hero">
-    <img class="capy" src="assets/capybara.png" alt="" aria-hidden="true" width="489" height="489">
-    <h1 class="rise">Small games, made <em>slowly</em>.</h1>
-    <p class="lede rise muted">One person, one puzzle at a time. No timers, no energy bars,
-       nothing that nags you to come back.</p>
-  </header>
+  <div class="apps">
 
-  <hr class="rule">
-
-  <section class="worlds rise">
-    <p class="eyebrow">Ten worlds</p>
-    <p>Longbara changes its colours as you get deeper. These are the real palettes,
-       straight out of the game — try one.</p>
-    <ul class="chips" id="chips">
-      <li><button class="chip" type="button" data-set="bosco" aria-pressed="true">Bosco</button></li>
-      <li><button class="chip" type="button" data-set="tramonto" aria-pressed="false">Tramonto</button></li>
-      <li><button class="chip" type="button" data-set="lavanda" aria-pressed="false">Lavanda</button></li>
-      <li><button class="chip" type="button" data-set="menta" aria-pressed="false">Menta</button></li>
-      <li><button class="chip" type="button" data-set="sabbia" aria-pressed="false">Sabbia</button></li>
-      <li><button class="chip" type="button" data-set="mirtillo" aria-pressed="false">Mirtillo</button></li>
-      <li><button class="chip" type="button" data-set="cielo" aria-pressed="false">Cielo</button></li>
-      <li><button class="chip" type="button" data-set="cacao" aria-pressed="false">Cacao</button></li>
-      <li><button class="chip" type="button" data-set="rosa" aria-pressed="false">Rosa</button></li>
-      <li><button class="chip" type="button" data-set="muschio" aria-pressed="false">Muschio</button></li>
-    </ul>
-  </section>
-
-  <section class="games">
-    <p class="eyebrow">The games</p>
-
-    <article class="entry">
-      <div class="entry-head">
-        <img class="entry-icon" src="assets/longbara-icon.png" alt="Longbara app icon"
-             width="384" height="384" loading="lazy">
-        <div>
-          <h3>Longbara</h3>
-          <p class="muted">A calm sliding-path puzzle</p>
+    <!-- Longbara: la sua ambientazione "bosco", il suo carattere Fraunces -->
+    <a class="app" href="/longbara/" style="--a-bg:#E4EDD8; --a-ink:#3B4A32; --a-mute:#5E6B52; --a-chip:rgba(232,166,78,.3);">
+      <div class="app-text">
+        <div class="app-head">
+          <img class="app-icon" src="/longbara/assets/icon.png" alt="" width="512" height="512" loading="lazy">
+          <div>
+            <h3 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-stretch:100%;letter-spacing:-.015em;font-variation-settings:'opsz' 60,'SOFT' 40">Longbara</h3>
+            <p lang="en">A calm sliding-path puzzle</p>
+            <p lang="it">Un puzzle di percorsi, senza fretta</p>
+          </div>
+        </div>
+        <p lang="en">Guide a sleepy capybara across the board and fill every tile in one unbroken path. No timers, no lives, nothing that nags you to come back.</p>
+        <p lang="it">Guida un capibara assonnato sulla board e riempi ogni casella con un solo percorso continuo. Niente timer, niente vite, niente che ti chiami per tornare.</p>
+        <div class="app-foot">
+          <span class="chip" lang="en">Coming to Android &amp; iOS</span>
+          <span class="chip" lang="it">In arrivo su Android e iOS</span>
+          <span class="app-cta"><span lang="en">Open Longbara</span><span lang="it">Apri Longbara</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
         </div>
       </div>
-
-      <span class="status">Coming to Android &amp; iOS</span>
-
-      <div class="entry-body">
-        <div>
-          <p>Guide a sleepy capybara across the board and fill every single tile in one
-             unbroken path. Swipe, and it slides until something stops it — it will not
-             stop halfway, and it will not turn on its own. Miss a tile and you are boxed
-             in, so think before you move.</p>
-          <p>It starts on a board of nine tiles you solve without trying. Forty levels
-             later you are staring at sixty tiles and six forks, working backwards from
-             the last corner. The difficulty grows on its own, and nothing ever asks you
-             to hurry.</p>
-          <ul class="facts">
-            <li>Every level is checked before you see it. It is always solvable.</li>
-            <li>Free hints daily. Never a wall you have to pay to pass.</li>
-            <li>Mandarins hidden on blocks, for players who want more than the win.</li>
-            <li>No account, no sign-up, no connection needed to play.</li>
-          </ul>
-          <p style="margin-top:1.6rem"><a href="/longbara/privacy.html">Privacy policy</a></p>
+      <div class="app-art" aria-hidden="true">
+        <div class="board">
+          <div class="tile"></div><div class="tile"></div><div class="tile tile--block"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+          <div class="tile"></div><div class="tile tile--path"></div><div class="tile tile--path"></div><div class="tile tile--path"></div><div class="tile tile--path"></div><div class="tile"></div>
+          <div class="tile"></div><div class="tile tile--path"></div><div class="tile tile--block"></div><div class="tile"></div><div class="tile tile--path"></div><div class="tile"></div>
+          <div class="tile"></div><div class="tile tile--path"></div><div class="tile"></div><div class="tile"></div><div class="tile tile--path"></div><div class="tile tile--path"></div>
         </div>
-
-        <div class="board" aria-hidden="true">
-      <div class="tile"></div><div class="tile"></div><div class="tile tile--block"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile tile--filled"></div>
-      <div class="tile tile--filled"></div><div class="tile tile--filled"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile tile--block"></div>
-      <div class="tile"></div><div class="tile tile--filled"></div><div class="tile"></div>
-          <div class="tile"></div><div class="tile tile--head"></div><div class="tile"></div>
-          <div class="tile"></div><div class="tile tile--filled"></div><div class="tile tile--filled"></div>
-        </div>
+        <img class="capy" src="/longbara/assets/capybara.png" alt="" width="489" height="489" loading="lazy">
       </div>
-    </article>
+    </a>
+
+
+  </div>
+
+  <section class="about" id="about">
+    <div>
+      <span class="eyebrow" lang="en">About</span>
+      <span class="eyebrow" lang="it">Chi siamo</span>
+      <h2 lang="en">Three things every Mugenbyte app promises.</h2>
+      <h2 lang="it">Tre cose che ogni app Mugenbyte promette.</h2>
+      <p class="muted" lang="en">Mugenbyte is Pietro Sardaro, one developer in Puglia. Different apps, different looks, the same rules underneath.</p>
+      <p class="muted" lang="it">Mugenbyte è Pietro Sardaro, uno sviluppatore in Puglia. App diverse, stili diversi, le stesse regole sotto.</p>
+    </div>
+    <div class="promises">
+      <div class="promise">
+        <span class="n">01</span>
+        <h3 lang="en">No accounts.</h3><h3 lang="it">Niente account.</h3>
+        <p lang="en">Nothing to sign up for. Your progress stays on your phone.</p>
+        <p lang="it">Niente a cui iscriversi. I tuoi progressi restano sul tuo telefono.</p>
+      </div>
+      <div class="promise">
+        <span class="n">02</span>
+        <h3 lang="en">No tracking of our own.</h3><h3 lang="it">Nessun tracciamento nostro.</h3>
+        <p lang="en">No analytics, no crash reports, no usage data collected by us.</p>
+        <p lang="it">Niente analitiche, niente rapporti sugli errori, nessun dato d'uso raccolto da noi.</p>
+      </div>
+      <div class="promise">
+        <span class="n">03</span>
+        <h3 lang="en">Ads only where it says so.</h3><h3 lang="it">Pubblicità solo dove è scritto.</h3>
+        <p lang="en">Each app's page says exactly which ads it shows and how to opt out.</p>
+        <p lang="it">La pagina di ogni app dice esattamente quali annunci mostra e come rifiutarli.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="contact">
-    <p class="eyebrow">Say hello</p>
-    <h2>Found a bug? Got an idea?</h2>
+  <section class="contact" id="contact">
+    <div>
+      <span class="eyebrow" lang="en">Contact</span>
+      <span class="eyebrow" lang="it">Contatti</span>
+      <h2 lang="en">Found a bug?<br>Got an idea?</h2>
+      <h2 lang="it">Un errore?<br>Un'idea?</h2>
+      <p class="muted" lang="en">Write and you will get an answer from the person who made the app. The form opens your email app; this site stores nothing.</p>
+      <p class="muted" lang="it">Scrivi e ti risponde la persona che ha fatto l'app. Il modulo apre la tua posta; questo sito non conserva nulla.</p>
+    </div>
     <form id="contact-form">
-      <label>Your name
+      <label><span lang="en">Your name</span><span lang="it">Il tuo nome</span>
         <input type="text" name="name" autocomplete="name" required>
       </label>
-      <label>Subject
+      <label><span lang="en">Subject</span><span lang="it">Oggetto</span>
         <input type="text" name="subject" value="Hello" required>
       </label>
-      <label>Message
+      <label><span lang="en">Message</span><span lang="it">Messaggio</span>
         <textarea name="message" required></textarea>
       </label>
-      <button type="submit">Send message</button>
-      <p class="note muted">Opens your email app with the message ready to send.
-         This page stores nothing and sends nothing on its own.</p>
+      <div><button class="button button--hot" type="submit"><span lang="en">Send message</span><span lang="it">Invia il messaggio</span></button></div>
     </form>
   </section>
-
-  <hr class="rule" style="margin-top:clamp(3rem,8vw,6rem)">
-  <footer class="muted">
-    <span>© <span id="year">2026</span> Pietro Sardaro Apps</span>
-    <span>Made in Puglia</span>
-    <!-- Niente link "Privacy" qui: l'informativa e' di ogni singolo gioco e sta
-         nella sua scheda. Un link generico nel piè di pagina farebbe credere che
-         ne esista una sola per tutto, e col secondo gioco sarebbe falso. -->
-    <span>This site sets no cookies and collects nothing.</span>
-  </footer>
 </main>
+
+<footer class="site-foot">
+  <span class="brand">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 6 3"><rect class="bit" x="1.025" y="0.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="4.025" y="0.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="0.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="2.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="3.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="5.025" y="1.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="1.025" y="2.025" width="0.95" height="0.95" rx="0.03"/><rect class="bit" x="4.025" y="2.025" width="0.95" height="0.95" rx="0.03"/></svg></span>
+    <span>© <span id="year">2026</span> Mugenbyte · <span lang="en">trading name of Pietro Sardaro · Made in Puglia</span><span lang="it">nome commerciale di Pietro Sardaro · Fatto in Puglia</span></span>
+  </span>
+  <span class="eyebrow" lang="en">This site sets no cookies and collects nothing.</span>
+  <span class="eyebrow" lang="it">Questo sito non usa cookie e non raccoglie nulla.</span>
+</footer>
 
 <script>
 (function () {
-  // --- ambientazioni ---
-  var chips = document.getElementById('chips');
-  chips.addEventListener('click', function (event) {
-    var button = event.target.closest('.chip');
-    if (!button) return;
-    document.documentElement.dataset.world = button.dataset.set;
-    chips.querySelectorAll('.chip').forEach(function (other) {
-      other.setAttribute('aria-pressed', String(other === button));
-    });
-  });
-
-  // --- contatto ---
-  // L'indirizzo non sta scritto nel sorgente: i raccoglitori automatici leggono
-  // l'HTML com'e', e un mailto in chiaro su una pagina indicizzata si paga in spam.
-  var user = ['pietro.sardaro', 'outlook.com'];
-
-  // Per passare a un modulo vero (Formspree, Web3Forms e simili) basta mettere qui
-  // l'endpoint: da quel momento il messaggio parte in POST invece di aprire la posta.
-  // Attenzione: da allora un terzo tratterebbe i dati di chi scrive, e l'informativa
-  // andrebbe integrata.
+  // L'indirizzo non sta scritto nel sorgente: un mailto in chiaro su una pagina
+  // indicizzata si paga in spam. Per passare a un modulo vero (Formspree e simili)
+  // basta mettere qui l'endpoint; da quel momento un terzo tratterebbe i dati di chi
+  // scrive e l'informativa andrebbe integrata.
+  var user = ['support', 'mugenbyte.com'];
   var ENDPOINT = '';
-
   var form = document.getElementById('contact-form');
   form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -279,20 +206,16 @@
     var name = (data.get('name') || '').trim();
     var subject = (data.get('subject') || 'Hello').trim();
     var message = (data.get('message') || '').trim();
-
     if (ENDPOINT) {
       fetch(ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
-        .then(function () { form.reset(); alert('Thanks — your message is on its way.'); })
-        .catch(function () { alert('Something went wrong. Please try again later.'); });
+        .then(function () { form.reset(); })
+        .catch(function () {});
       return;
     }
-
     window.location.href = 'mailto:' + user.join('@') +
       '?subject=' + encodeURIComponent(subject) +
       '&body=' + encodeURIComponent(message + '\n\n— ' + name);
   });
-
-  document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 </body>
