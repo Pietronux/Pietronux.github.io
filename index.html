@@ -16,6 +16,12 @@
 <meta property="og:url" content="https://www.mugenbyte.com/">
 <meta property="og:image" content="https://www.mugenbyte.com/assets/brand/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mugenbyte — small apps, endless care">
+<meta name="twitter:description" content="Independent mobile apps made to do one thing well.">
+<meta name="twitter:image" content="https://www.mugenbyte.com/assets/brand/og.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Mugenbyte","url":"https://www.mugenbyte.com/","logo":"https://www.mugenbyte.com/assets/brand/icon-512.png","sameAs":["https://apps.apple.com/app/longbara/id6804497431","https://play.google.com/store/apps/details?id=com.pietronux.longbara","https://130r.app"]}
+</script>
 <meta name="theme-color" content="#F6F1E8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14171E" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
@@ -40,6 +46,10 @@
     animation: bob 7s ease-in-out infinite;
   }
   @keyframes bob { 50% { transform: translateY(-9px) rotate(-2deg); } }
+  .app--130r { --a-bg:#111318 !important; --a-ink:#F5F7FA !important; --a-mute:#AAB3C2 !important; --a-chip:rgba(255,255,255,.14) !important; }
+  .app--130r .app-icon { background:#F5F7FA; padding:.35rem; }
+  .app--130r .app-art { background:linear-gradient(135deg,#1B2330,#0A0B0F); }
+  .app--130r .app-art::after { content:'130R'; position:absolute; right:8%; bottom:8%; color:#F5F7FA; font:700 clamp(3rem,8vw,7rem)/.8 'JetBrains Mono',monospace; letter-spacing:-.08em; opacity:.12; }
 
   @media (max-width: 52rem) {
     .app-art { min-height: 13rem; }
@@ -120,6 +130,29 @@
       </div>
     </a>
 
+
+    <!-- 130R: stile scuro e tecnico, collegamento al sito dedicato -->
+    <a class="app app--130r" href="https://130r.app" target="_blank" rel="noopener noreferrer">
+      <div class="app-text">
+        <div class="app-head">
+          <img class="app-icon" src="/130r/assets/icon.png" alt="" width="1024" height="1024" loading="lazy">
+          <div>
+            <h3>130R</h3>
+            <p lang="en">Track every lap</p>
+            <p lang="it">Cronometra ogni giro</p>
+          </div>
+        </div>
+        <p lang="en">Track laps on the circuit, understand your pace, and keep every useful detail in one clear place.</p>
+        <p lang="it">Cronometra i giri in pista, capisci il tuo ritmo e tieni ogni dettaglio utile in un unico posto chiaro.</p>
+        <div class="app-foot">
+          <span class="chip" lang="en">Explore 130R</span>
+          <span class="chip" lang="it">Scopri 130R</span>
+          <span class="app-cta"><span lang="en">Open 130R</span><span lang="it">Apri 130R</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </div>
+      <div class="app-art" aria-hidden="true"></div>
+    </a>
 
   </div>
 
