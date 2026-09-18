@@ -58,10 +58,13 @@
   .app--130r .app-text > p { color:#B4B5BB; font-size:1.05rem; line-height:1.55; }
   .app--130r .chip { color:#C8FF00; border:1px solid rgba(200,255,0,.30); background:rgba(200,255,0,.04); font-family:'130R Michroma',monospace; }
   .app--130r .app-art { min-height:15rem; padding:1rem; background:radial-gradient(circle at 70% 35%,rgba(200,255,0,.10),transparent 45%),#08080B; }
-  .app--130r .app-art::before { content:''; position:absolute; inset:13% 3%; border:2px solid rgba(200,255,0,.58); border-radius:48% 52% 42% 58%; transform:rotate(-16deg); box-shadow:0 0 24px rgba(200,255,0,.16),inset 0 0 18px rgba(200,255,0,.08); }
-  .app--130r .app-art::after { content:'LIVE  ·  LAP 12\\A\\A01:42.83'; white-space:pre; position:absolute; right:8%; bottom:8%; color:#FFF; font:700 clamp(1.2rem,3vw,2.2rem)/1.25 '130R Saira',system-ui,sans-serif; text-align:right; letter-spacing:.02em; opacity:.9; }
-  .app--130r .app-art .app-metric { position:absolute; left:1rem; top:1rem; z-index:1; color:#7B7C85; font:400 .58rem/1.7 '130R Michroma',monospace; letter-spacing:.04em; text-transform:uppercase; }
-  .app--130r .app-art .app-metric strong { display:block; color:#C8FF00; font:700 1rem/1.2 '130R Saira',system-ui,sans-serif; }
+  .app--130r .app-art .app-metric { position:absolute; left:1rem; top:1rem; z-index:1; color:#7B7C85; font:400 .7rem/1.7 '130R Michroma',monospace; letter-spacing:.04em; text-transform:uppercase; }
+  .app--130r .app-art .app-metric strong { display:block; color:#C8FF00; font:700 1.35rem/1.2 '130R Saira',system-ui,sans-serif; }
+  .app--130r .app-live { position:absolute; right:8%; bottom:8%; z-index:1; min-width:11rem; padding:1rem 1.2rem; border:1px solid #2D2E36; border-radius:10px; background:rgba(31,32,39,.82); text-align:right; }
+  .app--130r .app-live-label { display:block; color:#C8FF00; font:400 .58rem/1.4 '130R Michroma',monospace; letter-spacing:.05em; }
+  .app--130r .app-live strong { display:block; color:#FFF; font:900 clamp(1.7rem,4vw,2.8rem)/1.05 '130R Saira',system-ui,sans-serif; }
+  .app--130r .app-live small { display:block; margin-top:.45rem; color:#B4B5BB; font:400 .55rem/1.3 '130R Michroma',monospace; }
+  .app--130r .app-live b { color:#00D656; font-weight:400; }
 
   @media (max-width: 52rem) {
     .app-art { min-height: 13rem; }
@@ -131,7 +134,7 @@
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
         </div>
       </div>
-      <div class="app-art" aria-hidden="true"><span class="app-metric">Live timer<strong>0.01s</strong>Offline ready</span></div>
+      <div class="app-art" aria-hidden="true"><span class="app-metric">Live timer<strong>0.01s</strong>Offline ready</span><span class="app-live"><span class="app-live-label">LIVE · LAP 12</span><strong>01:42.83</strong><small>Δ vs session best <b>-0.412</b></small></span></div>
     </a>
 
     <!-- Longbara: la sua ambientazione "bosco", il suo carattere Fraunces -->
