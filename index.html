@@ -46,14 +46,22 @@
     animation: bob 7s ease-in-out infinite;
   }
   @keyframes bob { 50% { transform: translateY(-9px) rotate(-2deg); } }
-  .app--130r { --a-bg:#08080B !important; --a-ink:#F5F7FA !important; --a-mute:#A7ACB8 !important; --a-chip:rgba(200,255,0,.10) !important; border:1px solid rgba(200,255,0,.22); box-shadow:inset 0 0 0 1px rgba(255,255,255,.03); }
-  .app--130r:hover { box-shadow:0 18px 44px rgba(200,255,0,.12), inset 0 0 0 1px rgba(200,255,0,.26); }
-  .app--130r .app-icon { background:#F5F7FA; padding:.35rem; border-radius:.5rem; }
-  .app--130r .app-head h3, .app--130r .app-cta { font-family:'JetBrains Mono',ui-monospace,monospace; letter-spacing:.02em; }
-  .app--130r .chip { color:#C8FF00; border:1px solid rgba(200,255,0,.25); }
-  .app--130r .app-art { background:radial-gradient(circle at 70% 40%,rgba(200,255,0,.10),transparent 38%),linear-gradient(135deg,#11151C,#08080B); }
-  .app--130r .app-art::before { content:''; position:absolute; inset:12% 4%; border:2px solid rgba(200,255,0,.62); border-radius:48% 52% 42% 58%; transform:rotate(-16deg); box-shadow:0 0 24px rgba(200,255,0,.16), inset 0 0 18px rgba(200,255,0,.08); }
-  .app--130r .app-art::after { content:'130R'; position:absolute; right:8%; bottom:8%; color:#F5F7FA; font:700 clamp(3rem,8vw,7rem)/.8 'JetBrains Mono',monospace; letter-spacing:-.08em; opacity:.14; }
+  @font-face { font-family:'130R Saira'; src:url('/assets/fonts/130r-saira.woff2') format('woff2'); font-weight:700 900; font-display:swap; }
+  @font-face { font-family:'130R Saira SC'; src:url('/assets/fonts/130r-saira-sc.woff2') format('woff2'); font-weight:500; font-display:swap; }
+  @font-face { font-family:'130R Michroma'; src:url('/assets/fonts/130r-michroma.woff2') format('woff2'); font-weight:400; font-display:swap; }
+  .app--130r { --a-bg:#08080B !important; --a-ink:#FFF !important; --a-mute:#B4B5BB !important; --a-chip:rgba(200,255,0,.07) !important; border:1px solid #2D2E36; border-radius:10px; background:#08080B; box-shadow:inset 0 0 0 1px rgba(255,255,255,.02); font-family:'130R Saira SC',system-ui,sans-serif; }
+  .app--130r:hover { box-shadow:0 18px 44px rgba(200,255,0,.12),inset 0 0 0 1px rgba(200,255,0,.26); }
+  .app--130r .app-icon { background:#FFF; padding:.35rem; border-radius:10px; }
+  .app--130r .app-head h3 { font:900 clamp(2rem,1.4rem + 1.8vw,3rem)/1 '130R Saira',system-ui,sans-serif; letter-spacing:-.025em; }
+  .app--130r .app-head p, .app--130r .app-cta { font-family:'130R Saira SC',system-ui,sans-serif; }
+  .app--130r .app-head p:first-of-type { color:#C8FF00; font-family:'130R Michroma',monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; }
+  .app--130r .app-text > p { color:#B4B5BB; font-size:1.05rem; line-height:1.55; }
+  .app--130r .chip { color:#C8FF00; border:1px solid rgba(200,255,0,.30); background:rgba(200,255,0,.04); font-family:'130R Michroma',monospace; }
+  .app--130r .app-art { min-height:15rem; padding:1rem; background:radial-gradient(circle at 70% 35%,rgba(200,255,0,.10),transparent 45%),#08080B; }
+  .app--130r .app-art::before { content:''; position:absolute; inset:13% 3%; border:2px solid rgba(200,255,0,.58); border-radius:48% 52% 42% 58%; transform:rotate(-16deg); box-shadow:0 0 24px rgba(200,255,0,.16),inset 0 0 18px rgba(200,255,0,.08); }
+  .app--130r .app-art::after { content:'LIVE  ·  LAP 12\\A\\A01:42.83'; white-space:pre; position:absolute; right:8%; bottom:8%; color:#FFF; font:700 clamp(1.2rem,3vw,2.2rem)/1.25 '130R Saira',system-ui,sans-serif; text-align:right; letter-spacing:.02em; opacity:.9; }
+  .app--130r .app-art .app-metric { position:absolute; left:1rem; top:1rem; z-index:1; color:#7B7C85; font:400 .58rem/1.7 '130R Michroma',monospace; letter-spacing:.04em; text-transform:uppercase; }
+  .app--130r .app-art .app-metric strong { display:block; color:#C8FF00; font:700 1rem/1.2 '130R Saira',system-ui,sans-serif; }
 
   @media (max-width: 52rem) {
     .app-art { min-height: 13rem; }
@@ -123,7 +131,7 @@
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
         </div>
       </div>
-      <div class="app-art" aria-hidden="true"></div>
+      <div class="app-art" aria-hidden="true"><span class="app-metric">Live timer<strong>0.01s</strong>Offline ready</span></div>
     </a>
 
     <!-- Longbara: la sua ambientazione "bosco", il suo carattere Fraunces -->
