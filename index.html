@@ -49,22 +49,27 @@
   @font-face { font-family:'130R Saira'; src:url('/assets/fonts/130r-saira.woff2') format('woff2'); font-weight:700 900; font-display:swap; }
   @font-face { font-family:'130R Saira SC'; src:url('/assets/fonts/130r-saira-sc.woff2') format('woff2'); font-weight:500; font-display:swap; }
   @font-face { font-family:'130R Michroma'; src:url('/assets/fonts/130r-michroma.woff2') format('woff2'); font-weight:400; font-display:swap; }
-  .app--130r { --a-bg:#08080B !important; --a-ink:#FFF !important; --a-mute:#B4B5BB !important; --a-chip:rgba(200,255,0,.07) !important; border:1px solid #2D2E36; border-radius:10px; background:#08080B; box-shadow:inset 0 0 0 1px rgba(255,255,255,.02); font-family:'130R Saira SC',system-ui,sans-serif; }
-  .app--130r:hover { box-shadow:0 18px 44px rgba(200,255,0,.12),inset 0 0 0 1px rgba(200,255,0,.26); }
-  .app--130r .app-icon { background:#FFF; padding:.35rem; border-radius:10px; }
-  .app--130r .app-head h3 { font:900 clamp(2rem,1.4rem + 1.8vw,3rem)/1 '130R Saira',system-ui,sans-serif; letter-spacing:-.025em; }
-  .app--130r .app-head p, .app--130r .app-cta { font-family:'130R Saira SC',system-ui,sans-serif; }
-  .app--130r .app-head p:first-of-type { color:#C8FF00; font-family:'130R Michroma',monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; }
-  .app--130r .app-text > p { color:#B4B5BB; font-size:1.05rem; line-height:1.55; }
-  .app--130r .chip { color:#C8FF00; border:1px solid rgba(200,255,0,.30); background:rgba(200,255,0,.04); font-family:'130R Michroma',monospace; }
-  .app--130r .app-art { min-height:15rem; padding:1rem; background:radial-gradient(circle at 70% 35%,rgba(200,255,0,.10),transparent 45%),#08080B; }
-  .app--130r .app-art .app-metric { position:absolute; left:1rem; top:1rem; z-index:1; color:#7B7C85; font:400 .7rem/1.7 '130R Michroma',monospace; letter-spacing:.04em; text-transform:uppercase; }
-  .app--130r .app-art .app-metric strong { display:block; color:#C8FF00; font:700 1.35rem/1.2 '130R Saira',system-ui,sans-serif; }
-  .app--130r .app-live { position:absolute; right:8%; bottom:8%; z-index:1; min-width:11rem; padding:1rem 1.2rem; border:1px solid #2D2E36; border-radius:10px; background:rgba(31,32,39,.82); text-align:right; }
-  .app--130r .app-live-label { display:block; color:#C8FF00; font:400 .58rem/1.4 '130R Michroma',monospace; letter-spacing:.05em; }
-  .app--130r .app-live strong { display:block; color:#FFF; font:900 clamp(1.7rem,4vw,2.8rem)/1.05 '130R Saira',system-ui,sans-serif; }
-  .app--130r .app-live small { display:block; margin-top:.45rem; color:#B4B5BB; font:400 .55rem/1.3 '130R Michroma',monospace; }
-  .app--130r .app-live b { color:#00D656; font-weight:400; }
+  .app--130r { --a-bg:#101114; --a-ink:#F7F8FA; --a-mute:#BCC0C8; --a-chip:#27292F; border-radius:16px; background:var(--a-bg); font-family:'130R Saira',system-ui,sans-serif; }
+  .app--130r:hover { box-shadow:0 18px 44px rgba(16,17,20,.22); }
+  .app--130r:focus-visible { outline:3px solid #FF5C00; outline-offset:5px; }
+  .app--130r::selection { background:#FF5C00; color:#101114; }
+  .app--130r .app-text { gap:1.5rem; }
+  .app--130r .app-icon { padding:0; border-radius:16px; box-shadow:none; }
+  .app--130r .app-head h3 { font:900 clamp(2.5rem,2rem + 1.8vw,3.5rem)/1 '130R Saira',system-ui,sans-serif; letter-spacing:-.025em; }
+  .app--130r .app-head p { color:#FF8A47; font:500 .85rem/1.5 '130R Saira SC',system-ui,sans-serif; }
+  .app--130r .app-text > p { color:var(--a-mute); font:400 clamp(1rem,.95rem + .25vw,1.15rem)/1.6 'Archivo',system-ui,sans-serif; margin:0; }
+  .app--130r .app-foot { gap:1rem 1.5rem; }
+  .app--130r .chip { color:#E5E7EB; border:0; background:var(--a-chip); font:500 .72rem/1.3 '130R Saira SC',system-ui,sans-serif; letter-spacing:.02em; border-radius:6px; }
+  .app--130r .app-cta { color:#FF8A47; min-height:44px; font:700 1rem/1.4 '130R Saira',system-ui,sans-serif; }
+  .app--130r .app-art { display:grid; place-items:center; min-height:24rem; isolation:isolate; }
+  .app--130r .app-art::before { content:''; position:absolute; inset:8% -35% 8% 12%; background:#FF5C00; clip-path:polygon(30% 0,100% 0,70% 100%,0 100%); z-index:-1; }
+  .app--130r .app-screen { display:block; width:11rem; height:auto; border-radius:18px; box-shadow:0 20px 36px rgba(0,0,0,.32); }
+  @media (max-width:52rem) {
+    .app--130r { gap:1.5rem; }
+    .app--130r .app-art { min-height:21rem; }
+    .app--130r .app-screen { width:9.5rem; }
+    .app--130r .app-art::before { inset:5% -35% 5% -15%; }
+  }
 
   @media (max-width: 52rem) {
     .app-art { min-height: 13rem; }
@@ -114,27 +119,29 @@
 
   <div class="apps">
 
-    <!-- 130R: stile scuro e tecnico, collegamento al sito dedicato -->
+    <!-- 130R: identità racing e schermata reale del cronometro -->
     <a class="app app--130r" href="https://130r.app" target="_blank" rel="noopener noreferrer">
       <div class="app-text">
         <div class="app-head">
           <img class="app-icon" src="/130r/assets/icon.png" alt="" width="1024" height="1024" loading="lazy">
           <div>
             <h3>130R</h3>
-            <p lang="en">Track every lap</p>
-            <p lang="it">Cronometra ogni giro</p>
+            <p lang="en">GPS Lap Timer</p>
+            <p lang="it">Cronometro GPS</p>
           </div>
         </div>
-        <p lang="en">Track laps on the circuit, understand your pace, and keep every useful detail in one clear place.</p>
-        <p lang="it">Cronometra i giri in pista, capisci il tuo ritmo e tieni ogni dettaglio utile in un unico posto chiaro.</p>
+        <p lang="en">Every lap counts. Time your laps, compare sectors and analyse your GPS traces. Thousands of circuits worldwide, ready for your next track day. Free on iOS and Android, with offline lap timing.</p>
+        <p lang="it">Ogni giro conta. Cronometra i giri, confronta i settori e analizza le tracce GPS. Migliaia di circuiti nel mondo, pronti per la tua prossima giornata in pista. Gratis su iOS e Android, con cronometraggio anche offline.</p>
         <div class="app-foot">
-          <span class="chip" lang="en">Explore 130R</span>
-          <span class="chip" lang="it">Scopri 130R</span>
-          <span class="app-cta"><span lang="en">Open 130R</span><span lang="it">Apri 130R</span>
+          <span class="chip">iOS &amp; Android</span>
+          <span class="app-cta"><span lang="en">Discover 130R</span><span lang="it">Scopri 130R</span>
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
         </div>
       </div>
-      <div class="app-art" aria-hidden="true"><span class="app-metric">Live timer<strong>0.01s</strong>Offline ready</span><span class="app-live"><span class="app-live-label">LIVE · LAP 12</span><strong>01:42.83</strong><small>Δ vs session best <b>-0.412</b></small></span></div>
+      <div class="app-art" aria-hidden="true">
+        <img class="app-screen" src="/130r/assets/live-en.webp" lang="en" width="720" height="1565" alt="" loading="lazy">
+        <img class="app-screen" src="/130r/assets/live-it.webp" lang="it" width="720" height="1565" alt="" loading="lazy">
+      </div>
     </a>
 
     <!-- Longbara: la sua ambientazione "bosco", il suo carattere Fraunces -->
